@@ -12,6 +12,7 @@ public class I_am_the_player : MonoBehaviour
     private Vector2 move;
     private GameObject Target_Object;
     private bool holding_object, took_action;
+    public float action_button_held_down_timer;
 
 
     private void OnEnable()
@@ -46,11 +47,25 @@ public class I_am_the_player : MonoBehaviour
             Target_Object.GetComponent<I_am_a_Block>().Pick_Me_Up(hand);
             holding_object = true;
             took_action = true;
+            
         }
 
-        if (Input.GetButtonUp("Jump") && holding_object && !took_action)
+        if (Input.GetButtonDown("Jump") && holding_object)
+        {
+            action_button_held_down_timer = 0;
+            took_action = true;
+        }
+
+        if (Input.GetButton("Jump") && holding_object && !took_action)
+        {
+            action_button_held_down_timer += Time.deltaTime;
+            if (action_button_held_down_timer > 1.5f) action_button_held_down_timer = 1.5f;
+        }
+
+            if (Input.GetButtonUp("Jump") && holding_object && !took_action)
         {
             Target_Object.GetComponent<I_am_a_Block>().Drop_Me();
+            Target_Object.GetComponent<I_am_a_Block>().ThrowMe(action_button_held_down_timer * 5000, shoulder.rotation);
             Target_Object = null;
             took_action = true;
             holding_object = false;

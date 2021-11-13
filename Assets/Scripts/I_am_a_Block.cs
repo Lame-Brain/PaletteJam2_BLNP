@@ -6,6 +6,15 @@ public class I_am_a_Block : MonoBehaviour
 {
     private bool picked_up;
     private Transform target;
+    public Transform angle;
+    const int Player_Layer = 3, Object_Layer = 6;
+    private Rigidbody2D rb;
+
+    private void Start()
+    {
+        gameObject.layer = Object_Layer;
+        rb = gameObject.GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
@@ -25,12 +34,19 @@ public class I_am_a_Block : MonoBehaviour
     {
         picked_up = true;
         target = t;
-        gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+        gameObject.layer = Player_Layer;        
     }
 
     public void Drop_Me()
     {
         picked_up = false;
-        gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+        gameObject.layer = Object_Layer;        
+    }
+
+    public void ThrowMe(float f, Quaternion r)
+    {
+        angle.rotation = r;
+        rb.AddForce(r * Vector2.left * f, ForceMode2D.Impulse);
+        Debug.Log("throw");
     }
 }
