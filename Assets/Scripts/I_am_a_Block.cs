@@ -25,14 +25,12 @@ public class I_am_a_Block : MonoBehaviour
     {
         picked_up = true;
         target = t;
-        Debug.Log(transform.name + " picked up! by " + t.name);
         gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     public void Drop_Me()
     {
         picked_up = false;
-        Debug.Log(transform.name + " Dropped!");
         gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
     }
 }

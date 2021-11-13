@@ -45,7 +45,6 @@ public class I_am_the_player : MonoBehaviour
         {
             Target_Object.GetComponent<I_am_a_Block>().Pick_Me_Up(hand);
             holding_object = true;
-            Debug.Log("Picking up " + Target_Object.name);
             took_action = true;
         }
 
@@ -54,6 +53,7 @@ public class I_am_the_player : MonoBehaviour
             Target_Object.GetComponent<I_am_a_Block>().Drop_Me();
             Target_Object = null;
             took_action = true;
+            holding_object = false;
         }
     }
 
@@ -103,7 +103,6 @@ public class I_am_the_player : MonoBehaviour
         if (!holding_object)
         {
             Target_Object = t;
-            Debug.Log("Found a " + Target_Object.name);
         }
     }
 
