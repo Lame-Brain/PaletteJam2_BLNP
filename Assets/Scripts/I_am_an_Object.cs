@@ -2,13 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class I_am_a_Block : MonoBehaviour
+public class I_am_an_Object : MonoBehaviour
 {
     private bool picked_up;
     private Transform target;
     public Transform angle;
     const int Player_Layer = 3, Object_Layer = 6;
     private Rigidbody2D rb;
+
+    private void OnEnable()
+    {
+        GameManager.PunchObject += PunchMe;
+    }
+    private void OnDisable() 
+    {
+        GameManager.PunchObject -= PunchMe;
+    }
 
     private void Start()
     {
@@ -47,6 +56,10 @@ public class I_am_a_Block : MonoBehaviour
     {
         angle.rotation = r;
         rb.AddForce(r * Vector2.left * f, ForceMode2D.Impulse);
-        Debug.Log("throw");
+    }
+
+    public void PunchMe()
+    {
+
     }
 }
