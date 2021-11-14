@@ -511,7 +511,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffb2be19cb89204ebdb39b24ee38308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floortiles: []
+  floortiles:
+  - {fileID: 8547836523756260848, guid: beaab67e41fdfb848a238f9ad9490e0e, type: 3}
+  - {fileID: 4913203759843490883, guid: ca282f698f99a67489fcda6551fbc453, type: 3}
+  - {fileID: 3766358165912426499, guid: 397cdcd1dd5bfbf45ac4299527fdaf94, type: 3}
+  - {fileID: 2487315336205455690, guid: f9a09519bc9589a41ab93bb928b5e5b8, type: 3}
 --- !u!1001 &1561437546
 PrefabInstance:
   m_ObjectHideFlags: 0

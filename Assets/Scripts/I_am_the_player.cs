@@ -34,6 +34,7 @@ public class I_am_the_player : MonoBehaviour
 
     private void Start()
     {
+        GameManager.PLAYER = this;
     }
 
     private void Update()
@@ -111,6 +112,8 @@ public class I_am_the_player : MonoBehaviour
         Collider2D col = Physics2D.OverlapCircle(hand.position, 0.0f);
         if (col != null) 
             Target_Object = col.gameObject;
+        if (col == null)
+            Target_Object = null;
     }
 
     private void Idle_Anim() { anim.SetTrigger("Idle"); }

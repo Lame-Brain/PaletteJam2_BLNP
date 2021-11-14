@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d4dd1424a95ee46acfc14fdb663bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: {fileID: 7404075506526653656}
+  angle: {fileID: 1127373678548210939}
   Death_Effect: {fileID: 0}
 --- !u!50 &7404075506526653654
 Rigidbody2D:
