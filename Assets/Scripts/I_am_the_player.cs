@@ -18,14 +18,12 @@ public class I_am_the_player : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.OnTouchObject += Add_Interaction_Object;
-        GameManager.OnLeaveObject += Drop_Interaction_Object;
+
     }
 
     private void OnDisable()
     {
-        GameManager.OnTouchObject -= Add_Interaction_Object;
-        GameManager.OnLeaveObject -= Drop_Interaction_Object;
+
     }
 
     private void Awake()
@@ -45,10 +43,10 @@ public class I_am_the_player : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1"))
         {
+            Get_Target_Object();
             if (Target_Object != null)
             {
                 Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);
-                Debug.Log("Kicked " + Target_Object.name);
             }
             StartThrow_Anim();
         }
@@ -108,15 +106,11 @@ public class I_am_the_player : MonoBehaviour
     }
 
 
-    private void Add_Interaction_Object(GameObject t)
+    private void Get_Target_Object()
     {
-        Target_Object = t;
-        Debug.Log("Now touching " + t.name);
-    }
-
-    private void Drop_Interaction_Object(GameObject t)
-    {
-        if (Target_Object == t) { Target_Object = null; Debug.Log("No longer touching " + t.name); }        
+        Collider2D col = Physics2D.OverlapCircle(hand.position, 0.0f);
+        if (col != null) 
+            Target_Object = col.gameObject;
     }
 
     private void Idle_Anim() { anim.SetTrigger("Idle"); }

@@ -26,18 +26,8 @@ public class I_am_an_Object : MonoBehaviour
             {
                 isMoving = false;
                 ShortenFuse();
-                Debug.Log("stopped moving");
             }            
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.transform.tag == "Hands") GameManager.OnTouchObject(this.gameObject);
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.transform.tag == "Hands") GameManager.OnLeaveObject(this.gameObject);
     }
 
     public void PunchMe(float f, Quaternion r)
@@ -47,13 +37,13 @@ public class I_am_an_Object : MonoBehaviour
             angle.rotation = r;
             rb.AddForce(r * Vector2.left * 5000000, ForceMode2D.Impulse);
             isMoving = true;
-            Debug.Log("started moving");
         }
         if (gameObject.CompareTag("Block"))
         {
             Health -= f;
             if(Health <= 0)
             {
+                GameManager.OnBlockDeath(transform.position);
                 Destroy(gameObject);
             }
         }

@@ -5,6 +5,7 @@ using System;
 
 public static class GameManager
 {
-    public static Action<GameObject> OnTouchObject;
-    public static Action<GameObject> OnLeaveObject;
+    public static Action<Vector2> OnPlayerDeath;
+    public static Action<Vector2> OnBlockDeath;
+    public static Action<Vector2> OnBombDeath;
 }
