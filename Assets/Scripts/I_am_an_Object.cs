@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class I_am_an_Object : MonoBehaviour
 {
-    private bool picked_up;
     private Transform target;
     public Transform angle;
+    public GameObject Death_Effect;
     const int Player_Layer = 3, Object_Layer = 6;
+    private float Health = 5;
     private Rigidbody2D rb;
-
-    private void OnEnable()
-    {
-        GameManager.PunchObject += PunchMe;
-    }
-    private void OnDisable() 
-    {
-        GameManager.PunchObject -= PunchMe;
-    }
+    private bool isMoving;
 
     private void Start()
     {
@@ -27,7 +20,15 @@ public class I_am_an_Object : MonoBehaviour
 
     private void Update()
     {
-        if (picked_up) transform.position = target.position;
+        if (isMoving)
+        {
+            if (rb.velocity == Vector2.zero)
+            {
+                isMoving = false;
+                ShortenFuse();
+                Debug.Log("stopped moving");
+            }            
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,29 +37,29 @@ public class I_am_an_Object : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-    if (collision.transform.tag == "Hands") GameManager.OnLeaveObject(this.gameObject);
+        if (collision.transform.tag == "Hands") GameManager.OnLeaveObject(this.gameObject);
     }
 
-    public void Pick_Me_Up(Transform t)
+    public void PunchMe(float f, Quaternion r)
     {
-        picked_up = true;
-        target = t;
-        gameObject.layer = Player_Layer;        
+        if (gameObject.CompareTag("Bomb")) 
+        {
+            angle.rotation = r;
+            rb.AddForce(r * Vector2.left * 5000000, ForceMode2D.Impulse);
+            isMoving = true;
+            Debug.Log("started moving");
+        }
+        if (gameObject.CompareTag("Block"))
+        {
+            Health -= f;
+            if(Health <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
-    public void Drop_Me()
-    {
-        picked_up = false;
-        gameObject.layer = Object_Layer;        
-    }
-
-    public void ThrowMe(float f, Quaternion r)
-    {
-        angle.rotation = r;
-        rb.AddForce(r * Vector2.left * f, ForceMode2D.Impulse);
-    }
-
-    public void PunchMe()
+    private void ShortenFuse()
     {
 
     }

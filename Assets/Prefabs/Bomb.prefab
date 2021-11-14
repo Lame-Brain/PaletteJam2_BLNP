@@ -154,7 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d4dd1424a95ee46acfc14fdb663bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: {fileID: 1127373678548210939}
+  angle: {fileID: 7404075506526653656}
+  Death_Effect: {fileID: 0}
 --- !u!50 &7404075506526653654
 Rigidbody2D:
   serializedVersion: 4
@@ -171,8 +172,8 @@ Rigidbody2D:
   m_LinearDrag: 10
   m_AngularDrag: 10
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 48aa0de5e7698dc4b9c7d645ea39be74, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7

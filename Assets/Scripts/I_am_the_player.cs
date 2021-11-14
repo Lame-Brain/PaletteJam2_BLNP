@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class I_am_the_player : MonoBehaviour
 {
-    public float speed;
+    public float speed, punch_force;
     public Transform shoulder, hand;
 
     private Rigidbody2D rb;
     private Animator anim;
     private Vector2 move;
     private GameObject Target_Object;
-    private bool holding_object, took_action, isJumping;    
+    private bool isJumping;    
     public float action_button_held_down_timer;
     
 
@@ -43,42 +43,13 @@ public class I_am_the_player : MonoBehaviour
         move.x = Input.GetAxis("Horizontal");
         move.y = Input.GetAxis("Vertical");
 
-        if (Input.GetButtonUp("Fire1") && !holding_object && Target_Object != null && !took_action)
+        if (Input.GetButtonUp("Fire1"))
         {
-            if (Target_Object.tag == "Bomb")
+            if (Target_Object != null)
             {
-                Target_Object.GetComponent<I_am_an_Object>().Pick_Me_Up(hand);
-                holding_object = true;
+                Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);
+                Debug.Log("Kicked " + Target_Object.name);
             }
-            else if (Target_Object.tag == "Block")
-            {
-                StartThrow_Anim();
-                GameManager.PunchObject();
-            }
-            took_action = true;
-        }
-
-        if (Input.GetButtonDown("Fire1") && holding_object)
-        {
-            action_button_held_down_timer = 0;
-            took_action = true;
-            StartChargeThrow_Anim();
-        }
-
-        if (Input.GetButton("Fire1") && holding_object && !took_action)
-        {
-            action_button_held_down_timer += Time.deltaTime;
-            if (action_button_held_down_timer > 1.5f) action_button_held_down_timer = 1.5f;
-
-        }
-
-        if (Input.GetButtonUp("Fire1") && holding_object && !took_action)
-        {
-            Target_Object.GetComponent<I_am_an_Object>().Drop_Me();
-            Target_Object.GetComponent<I_am_an_Object>().ThrowMe(action_button_held_down_timer * 5000, shoulder.rotation);
-            Target_Object = null;
-            took_action = true;
-            holding_object = false;
             StartThrow_Anim();
         }
 
@@ -91,8 +62,6 @@ public class I_am_the_player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        took_action = false;
-
         rb.MovePosition(rb.position + move * speed);
 
         if (move.x > 0 && move.y == 0)
@@ -141,15 +110,13 @@ public class I_am_the_player : MonoBehaviour
 
     private void Add_Interaction_Object(GameObject t)
     {
-        if (!holding_object)
-        {
-            Target_Object = t;
-        }
+        Target_Object = t;
+        Debug.Log("Now touching " + t.name);
     }
 
     private void Drop_Interaction_Object(GameObject t)
     {
-        if (!holding_object) Target_Object = null;
+        if (Target_Object == t) { Target_Object = null; Debug.Log("No longer touching " + t.name); }        
     }
 
     private void Idle_Anim() { anim.SetTrigger("Idle"); }

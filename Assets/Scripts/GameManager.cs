@@ -7,5 +7,4 @@ public static class GameManager
 {
     public static Action<GameObject> OnTouchObject;
     public static Action<GameObject> OnLeaveObject;
-    public static Action PunchObject;
 }
