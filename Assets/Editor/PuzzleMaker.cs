@@ -1,0 +1,70 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+
+[CustomEditor(typeof(PuzzleManager))]
+public class PuzzleMaker : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        PuzzleManager puzzle = (PuzzleManager)target;
+        base.OnInspectorGUI();
+                
+        if (GUILayout.Button("Generate Play Area"))
+        {
+            foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Terrain")) DestroyImmediate(_go);
+            foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Hole")) DestroyImmediate(_go);
+            foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Pool")) DestroyImmediate(_go);
+
+
+            puzzle.half_vert = Mathf.RoundToInt((puzzle.vertical_BoardSize / 2));
+            puzzle.half_horz = Mathf.RoundToInt((puzzle.horizontal_BoardSize / 2));
+
+            puzzle.floor_map = new GameObject[puzzle.horizontal_BoardSize, puzzle.vertical_BoardSize];
+            for (int _y = 0; _y < puzzle.vertical_BoardSize; _y++)
+                for (int _x = 0; _x < puzzle.horizontal_BoardSize; _x++)
+                {
+                    Quaternion _angle = Quaternion.identity;
+                    int _r = Random.Range(0, 4);
+                    if (_r == 0) _angle.eulerAngles = new Vector3(0, 0, 0);
+                    if (_r == 1) _angle.eulerAngles = new Vector3(0, 0, 90);
+                    if (_r == 2) _angle.eulerAngles = new Vector3(0, 0, 180);
+                    if (_r == 3) _angle.eulerAngles = new Vector3(0, 0, 270);
+                    puzzle.floor_map[_x, _y] = Instantiate(puzzle.floortiles[Random.Range(0, puzzle.floortiles.Count)],
+                                                    new Vector3(_x - (puzzle.horizontal_BoardSize / 2), _y - (puzzle.vertical_BoardSize / 2), 0),
+                                                    _angle, puzzle.Floors_transform);
+                    puzzle.floor_map[_x, _y].name = "floor_tile_" + _x + "_" + _y;
+                }
+
+            for (int _y = -1; _y < puzzle.vertical_BoardSize + 1; _y++)
+            {
+                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3((puzzle.half_horz * -1) - 1, _y - puzzle.half_vert, 0), Quaternion.identity, puzzle.Walls_transform);
+                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3(puzzle.half_horz + 1, _y - puzzle.half_vert, 0), Quaternion.identity, puzzle.Walls_transform);
+            }
+            for (int _x = 0; _x < puzzle.horizontal_BoardSize; _x++)
+            {
+                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3(_x - puzzle.half_horz, (puzzle.half_vert * -1) - 1, 0), Quaternion.identity, puzzle.Walls_transform);
+                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3(_x - puzzle.half_horz, puzzle.half_vert + 1, 0), Quaternion.identity, puzzle.Walls_transform);
+            }
+
+            puzzle.Number_of_Waves = puzzle.Waves_transform.childCount;
+            puzzle.current_Wave = 1;
+
+            if (puzzle.Number_of_Holes > 0)
+                for (int _i = 0; _i < puzzle.Number_of_Holes; _i++)
+                    Instantiate(puzzle.Holes[Random.Range(0, puzzle.Holes.Count)],
+                                new Vector3(Random.Range(-puzzle.half_horz, puzzle.half_horz), Random.Range(-puzzle.half_vert, puzzle.half_vert), 0),
+                                Quaternion.identity, puzzle.Holes_transform);
+
+            if (puzzle.Number_of_LavaPools > 0)
+                for (int _i = 0; _i < puzzle.Number_of_LavaPools; _i++)
+                    Instantiate(puzzle.Pools[Random.Range(0, puzzle.Pools.Count)],
+                                new Vector3(Random.Range(-puzzle.half_horz, puzzle.half_horz), Random.Range(-puzzle.half_vert, puzzle.half_vert), 0),
+                                Quaternion.identity, puzzle.Pools_transform);
+
+        }
+
+
+    }
+}

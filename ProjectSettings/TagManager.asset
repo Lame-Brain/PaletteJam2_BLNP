@@ -9,6 +9,7 @@ TagManager:
   - Bomb
   - Hole
   - Pool
+  - Terrain
   layers:
   - Default
   - TransparentFX
