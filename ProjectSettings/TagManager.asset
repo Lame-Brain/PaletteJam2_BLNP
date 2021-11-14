@@ -6,14 +6,17 @@ TagManager:
   tags:
   - Block
   - Hands
+  - Bomb
+  - Hole
+  - Pool
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Object
   - 
   - 
   - 
