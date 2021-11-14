@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 1202838410028920847}
   m_Layer: 0
   m_Name: PuzzleManager
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,3 +274,7 @@ MonoBehaviour:
   Waves_transform: {fileID: 1202838409096195764}
   Holes_transform: {fileID: 6042139612139827129}
   Pools_transform: {fileID: 3673705261401088076}
+  Number_of_Waves: 0
+  current_Wave: 0
+  half_vert: 0
+  half_horz: 0
