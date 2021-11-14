@@ -7,6 +7,8 @@ TagManager:
   - Block
   - Hands
   - Bomb
+  - Hole
+  - Pool
   layers:
   - Default
   - TransparentFX

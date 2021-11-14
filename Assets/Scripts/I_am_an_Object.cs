@@ -43,8 +43,13 @@ public class I_am_an_Object : MonoBehaviour
             Health -= f;
             if(Health <= 0)
             {
-                GameManager.OnBlockDeath(transform.position);
+                //GameManager.OnBlockDeath(transform.position);
+                Debug.Log("Block dead");
                 Destroy(gameObject);
+            }
+            else
+            {
+                //Call Block hit animation trigger
             }
         }
     }
