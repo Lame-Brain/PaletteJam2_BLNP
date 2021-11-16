@@ -103,7 +103,7 @@ public class I_am_the_player : MonoBehaviour
             StartWalking_Anim();
             shoulder.rotation = Quaternion.Euler(0, 0, 90);
         }
-        if (move.x == 0 && move.y == 0) Idle_Anim();
+        //if (move.x == 0 && move.y == 0) Idle_Anim();
     }
 
 
@@ -116,10 +116,10 @@ public class I_am_the_player : MonoBehaviour
             Target_Object = null;
     }
 
-    private void Idle_Anim() { anim.SetTrigger("Idle"); }
-    private void StartWalking_Anim() { anim.SetTrigger("Start_Walking"); }
-    private void StartChargeThrow_Anim() { anim.SetTrigger("Finish_Throw"); }
-    private void StartJump_Anim() { anim.SetTrigger("Jump"); }
+    private void Idle_Anim() { anim.SetTrigger(""); }
+    private void StartWalking_Anim() { anim.SetTrigger(""); }
+    private void StartChargeThrow_Anim() { anim.SetTrigger(""); }
+    private void StartJump_Anim() { anim.SetTrigger(""); }
     private void StartThrow_Anim() 
     {        
         anim.ResetTrigger("Charge_Throw"); 

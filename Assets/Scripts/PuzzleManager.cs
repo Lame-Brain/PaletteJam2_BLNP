@@ -16,10 +16,10 @@ public class PuzzleManager : MonoBehaviour
 
     [Header("    ")]
     public List<GameObject> floortiles = new List<GameObject>();
-    public List<GameObject> Walls = new List<GameObject>();
     public List<GameObject> Holes = new List<GameObject>();
     public List<GameObject> Pools = new List<GameObject>();
     public GameObject[,] floor_map;
+    public GameObject UL_Wall_PF, U_Wall_PF, UR_Wall_PF, L_Wall_PF, R_Wall_PF, DL_Wall_PF, D_Wall_PF, DR_Wall_PF;
 
     [Header("    ")]
     public Transform Floors_transform;

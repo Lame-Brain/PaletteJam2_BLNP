@@ -37,16 +37,20 @@ public class PuzzleMaker : Editor
                     puzzle.floor_map[_x, _y].name = "floor_tile_" + _x + "_" + _y;
                 }
 
-            for (int _y = -1; _y < puzzle.vertical_BoardSize + 1; _y++)
+            for (int _y = 0; _y < puzzle.vertical_BoardSize; _y++)
             {
-                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3((puzzle.half_horz * -1) - 1, _y - puzzle.half_vert, 0), Quaternion.identity, puzzle.Walls_transform);
-                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3(puzzle.half_horz + 1, _y - puzzle.half_vert, 0), Quaternion.identity, puzzle.Walls_transform);
+                Instantiate(puzzle.L_Wall_PF, new Vector3((puzzle.half_horz * -1) - 1, _y - puzzle.half_vert, 0), Quaternion.identity, puzzle.Walls_transform);
+                Instantiate(puzzle.R_Wall_PF, new Vector3(puzzle.half_horz + 1, _y - puzzle.half_vert, 0), Quaternion.identity, puzzle.Walls_transform);
             }
             for (int _x = 0; _x < puzzle.horizontal_BoardSize; _x++)
             {
-                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3(_x - puzzle.half_horz, (puzzle.half_vert * -1) - 1, 0), Quaternion.identity, puzzle.Walls_transform);
-                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3(_x - puzzle.half_horz, puzzle.half_vert + 1, 0), Quaternion.identity, puzzle.Walls_transform);
+                Instantiate(puzzle.U_Wall_PF, new Vector3(_x - puzzle.half_horz, (puzzle.half_vert * -1) - 1, 0), Quaternion.identity, puzzle.Walls_transform);
+                Instantiate(puzzle.D_Wall_PF, new Vector3(_x - puzzle.half_horz, puzzle.half_vert + 1, 0), Quaternion.identity, puzzle.Walls_transform);
             }
+            Instantiate(puzzle.UL_Wall_PF, new Vector3((puzzle.half_horz * -1) - 1, puzzle.half_vert + 1, 0), Quaternion.identity, puzzle.Walls_transform);
+            Instantiate(puzzle.UR_Wall_PF, new Vector3((puzzle.half_horz + 1), puzzle.half_vert + 1, 0), Quaternion.identity, puzzle.Walls_transform);
+            Instantiate(puzzle.DL_Wall_PF, new Vector3((puzzle.half_horz * -1) - 1, (puzzle.half_vert * -1) - 1, 0), Quaternion.identity, puzzle.Walls_transform);
+            Instantiate(puzzle.DR_Wall_PF, new Vector3((puzzle.half_horz + 1),      (puzzle.half_vert * -1) - 1, 0), Quaternion.identity, puzzle.Walls_transform);
 
             puzzle.Number_of_Waves = puzzle.Waves_transform.childCount;
             puzzle.current_Wave = 1;

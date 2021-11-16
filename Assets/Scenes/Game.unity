@@ -174,6 +174,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3553841150490844696, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 17426746270384133, guid: cfe4f029c9742c04192f3e06f0271cd0, type: 3}
     - target: {fileID: 3553841150490844697, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
       propertyPath: punch_force
       value: 1
@@ -190,7 +194,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3553841150490844698, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
 --- !u!4 &387577001 stripped
 Transform:
@@ -353,6 +358,22 @@ PrefabInstance:
       value: PuzzleManager
       objectReference: {fileID: 0}
     - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: D_Wall_PF
+      value: 
+      objectReference: {fileID: 7960328275624044954, guid: 31ba61a485cc51c448a8978510efd342, type: 3}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: L_Wall_PF
+      value: 
+      objectReference: {fileID: 6754302370759106713, guid: 3424ad74f96731d47bc7cf54120fc796, type: 3}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: R_Wall_PF
+      value: 
+      objectReference: {fileID: 1782409249441565075, guid: 4d1efd28e6e3d55468977ff86f476bdb, type: 3}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: U_Wall_PF
+      value: 
+      objectReference: {fileID: 4957496916341304297, guid: 80ab7306613f5374ca3315056c4772d1, type: 3}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
       propertyPath: box_ratio
       value: 1
       objectReference: {fileID: 0}
@@ -361,9 +382,33 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: half_horz
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: half_vert
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
       propertyPath: tee_ratio
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: DL_Wall_PF
+      value: 
+      objectReference: {fileID: 6110611372125401953, guid: 5f8d58691c6898d4f9bccf2b45c03c13, type: 3}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: DR_Wall_PF
+      value: 
+      objectReference: {fileID: 3000505977276230178, guid: 148ee07b45d820b4b94e59cccc6b8945, type: 3}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: UL_Wall_PF
+      value: 
+      objectReference: {fileID: 2102320086280049230, guid: da2c1a2ec28df4c4880ae3cfc8f56a8d, type: 3}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: UR_Wall_PF
+      value: 
+      objectReference: {fileID: 1481284343832121725, guid: 24960dc16954c924089e46743f335d3f, type: 3}
     - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
       propertyPath: bolt_ratio
       value: 1
@@ -373,8 +418,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: current_Wave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
       propertyPath: Number_of_Holes
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: Number_of_Waves
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
+      propertyPath: Walls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1202838410028920847, guid: 072399a0563a062408cd451e5eda13ea, type: 3}
       propertyPath: vertical_BoardSize
