@@ -14,6 +14,7 @@ public class UI_Controller : MonoBehaviour
 
     public static bool GameIsPaused = false;
     public GameObject pauseMenu;
+    public GameObject HUD;
 
     // Start is called before the first frame update
     void Start()
@@ -64,12 +65,14 @@ public class UI_Controller : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        HUD.SetActive(true);
     }
     public void Pause()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        HUD.SetActive(false);
     }
     public void LoadMenu()
     {
