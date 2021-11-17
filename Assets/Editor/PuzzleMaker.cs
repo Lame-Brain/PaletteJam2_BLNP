@@ -9,14 +9,12 @@ public class PuzzleMaker : Editor
     public override void OnInspectorGUI()
     {
         PuzzleManager puzzle = (PuzzleManager)target;
-        base.OnInspectorGUI();
-                
+        
         if (GUILayout.Button("Generate Play Area"))
         {
             foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Terrain")) DestroyImmediate(_go);
             foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Hole")) DestroyImmediate(_go);
             foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Pool")) DestroyImmediate(_go);
-
 
             puzzle.half_vert = Mathf.RoundToInt((puzzle.vertical_BoardSize / 2));
             puzzle.half_horz = Mathf.RoundToInt((puzzle.horizontal_BoardSize / 2));
@@ -37,34 +35,45 @@ public class PuzzleMaker : Editor
                     puzzle.floor_map[_x, _y].name = "floor_tile_" + _x + "_" + _y;
                 }
 
-            for (int _y = -1; _y < puzzle.vertical_BoardSize + 1; _y++)
+            for (int _y = 0; _y < puzzle.vertical_BoardSize; _y++)
             {
-                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3((puzzle.half_horz * -1) - 1, _y - puzzle.half_vert, 0), Quaternion.identity, puzzle.Walls_transform);
-                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3(puzzle.half_horz + 1, _y - puzzle.half_vert, 0), Quaternion.identity, puzzle.Walls_transform);
+                Instantiate(puzzle.L_Wall_PF, new Vector3((puzzle.half_horz * -1) - 1, _y - puzzle.half_vert, 0), Quaternion.identity, puzzle.Walls_transform);
+                Instantiate(puzzle.R_Wall_PF, new Vector3(puzzle.half_horz + 1, _y - puzzle.half_vert, 0), Quaternion.identity, puzzle.Walls_transform);
             }
             for (int _x = 0; _x < puzzle.horizontal_BoardSize; _x++)
             {
-                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3(_x - puzzle.half_horz, (puzzle.half_vert * -1) - 1, 0), Quaternion.identity, puzzle.Walls_transform);
-                Instantiate(puzzle.Walls[Random.Range(0, puzzle.Walls.Count)], new Vector3(_x - puzzle.half_horz, puzzle.half_vert + 1, 0), Quaternion.identity, puzzle.Walls_transform);
+                Instantiate(puzzle.U_Wall_PF, new Vector3(_x - puzzle.half_horz, (puzzle.half_vert * -1) - 1, 0), Quaternion.identity, puzzle.Walls_transform);
+                Instantiate(puzzle.D_Wall_PF, new Vector3(_x - puzzle.half_horz, puzzle.half_vert + 1, 0), Quaternion.identity, puzzle.Walls_transform);
             }
+            Instantiate(puzzle.UL_Wall_PF, new Vector3((puzzle.half_horz * -1) - 1, puzzle.half_vert + 1, 0), Quaternion.identity, puzzle.Walls_transform);
+            Instantiate(puzzle.UR_Wall_PF, new Vector3((puzzle.half_horz + 1), puzzle.half_vert + 1, 0), Quaternion.identity, puzzle.Walls_transform);
+            Instantiate(puzzle.DL_Wall_PF, new Vector3((puzzle.half_horz * -1) - 1, (puzzle.half_vert * -1) - 1, 0), Quaternion.identity, puzzle.Walls_transform);
+            Instantiate(puzzle.DR_Wall_PF, new Vector3((puzzle.half_horz + 1),      (puzzle.half_vert * -1) - 1, 0), Quaternion.identity, puzzle.Walls_transform);
 
             puzzle.Number_of_Waves = puzzle.Waves_transform.childCount;
             puzzle.current_Wave = 1;
 
             if (puzzle.Number_of_Holes > 0)
                 for (int _i = 0; _i < puzzle.Number_of_Holes; _i++)
-                    Instantiate(puzzle.Holes[Random.Range(0, puzzle.Holes.Count)],
+                    Instantiate(puzzle.Holes,
                                 new Vector3(Random.Range(-puzzle.half_horz, puzzle.half_horz), Random.Range(-puzzle.half_vert, puzzle.half_vert), 0),
                                 Quaternion.identity, puzzle.Holes_transform);
 
             if (puzzle.Number_of_LavaPools > 0)
                 for (int _i = 0; _i < puzzle.Number_of_LavaPools; _i++)
-                    Instantiate(puzzle.Pools[Random.Range(0, puzzle.Pools.Count)],
+                    Instantiate(puzzle.Pools,
                                 new Vector3(Random.Range(-puzzle.half_horz, puzzle.half_horz), Random.Range(-puzzle.half_vert, puzzle.half_vert), 0),
                                 Quaternion.identity, puzzle.Pools_transform);
-
         }
 
+        if (GUILayout.Button("Clear Play Area"))
+        {
+            foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Terrain")) DestroyImmediate(_go);
+            foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Hole")) DestroyImmediate(_go);
+            foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Pool")) DestroyImmediate(_go);
+        }
+
+            base.OnInspectorGUI();
 
     }
 }

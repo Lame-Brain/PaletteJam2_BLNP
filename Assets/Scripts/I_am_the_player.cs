@@ -9,9 +9,10 @@ public class I_am_the_player : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator anim;
+    private SpriteRenderer sprite;
     private Vector2 move;
     private GameObject Target_Object;
-    private bool isJumping;    
+    public bool isJumping;    
     public float action_button_held_down_timer;
     
 
@@ -30,6 +31,7 @@ public class I_am_the_player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
+        sprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -41,6 +43,7 @@ public class I_am_the_player : MonoBehaviour
     {
         move.x = Input.GetAxis("Horizontal");
         move.y = Input.GetAxis("Vertical");
+        WalkStuff();
 
         if (Input.GetButtonUp("Fire1"))
         {
@@ -49,13 +52,17 @@ public class I_am_the_player : MonoBehaviour
             {
                 Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);
             }
-            StartThrow_Anim();
+            
+            if(anim.GetInteger("Move X") != 0) anim.SetTrigger("Kick_Side");
+            else if (anim.GetInteger("Move Y") < 0)  anim.SetTrigger("Kick_Up");
+            else anim.SetTrigger("Kick_Down");
         }
 
         if (Input.GetButtonDown("Jump"))
         {
             isJumping = true;
-            StartJump_Anim();
+            anim.ResetTrigger("Walking");
+            anim.SetTrigger("Jump");
         }
     }
 
@@ -63,49 +70,80 @@ public class I_am_the_player : MonoBehaviour
     {
         rb.MovePosition(rb.position + move * speed);
 
-        if (move.x > 0 && move.y == 0)
-        {
-            StartWalking_Anim();
-            shoulder.rotation = Quaternion.Euler(0, 0, 180);
-        }
-        if (move.x > 0 && move.y > 0)
-        {
-            StartWalking_Anim();
-            shoulder.rotation = Quaternion.Euler(0, 0, 225);
-        }
-        if (move.x > 0 && move.y < 0)
-        {
-            StartWalking_Anim();
-            shoulder.rotation = Quaternion.Euler(0, 0, 135);
-        }
-        if (move.x < 0 && move.y == 0)
-        {
-            StartWalking_Anim();
-            shoulder.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        if (move.x < 0 && move.y > 0)
-        {
-            StartWalking_Anim();
-            shoulder.rotation = Quaternion.Euler(0, 0, 315);
-        }
-        if (move.x < 0 && move.y < 0)
-        {
-            StartWalking_Anim();
-            shoulder.rotation = Quaternion.Euler(0, 0, 45);
-        }
-        if (move.x == 0 && move.y > 0)
-        {
-            StartWalking_Anim();
-            shoulder.rotation = Quaternion.Euler(0, 0, 270);
-        }
-        if (move.x == 0 && move.y < 0)
-        {
-            StartWalking_Anim();
-            shoulder.rotation = Quaternion.Euler(0, 0, 90);
-        }
-        if (move.x == 0 && move.y == 0) Idle_Anim();
     }
 
+    private void WalkStuff()
+    {
+        if (move.x > 0 && move.y == 0 && !isJumping)
+        {
+            anim.SetTrigger("Walking");
+            anim.SetInteger("Move Y", 0);
+            anim.SetInteger("Move X", 1);
+            sprite.flipX = false;
+            shoulder.rotation = Quaternion.Euler(0, 0, 180);
+        }
+        if (move.x > 0 && move.y > 0 && !isJumping)
+        {
+            anim.SetTrigger("Walking");
+            anim.SetInteger("Move Y", 1);
+            anim.SetInteger("Move X", 1);
+            sprite.flipX = false;
+            shoulder.rotation = Quaternion.Euler(0, 0, 225);
+        }
+        if (move.x > 0 && move.y < 0 && !isJumping)
+        {
+            anim.SetTrigger("Walking");
+            anim.SetInteger("Move Y", 1);
+            anim.SetInteger("Move X", 1);
+            sprite.flipX = false;
+            shoulder.rotation = Quaternion.Euler(0, 0, 135);
+        }
+        if (move.x < 0 && move.y == 0 && !isJumping)
+        {
+            anim.SetTrigger("Walking");
+            anim.SetInteger("Move Y", 0);
+            anim.SetInteger("Move X", -1);
+            sprite.flipX = true;
+            shoulder.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        if (move.x < 0 && move.y > 0 && !isJumping)
+        {
+            anim.SetTrigger("Walking");
+            anim.SetInteger("Move Y", -1);
+            anim.SetInteger("Move X", -1);
+            sprite.flipX = true;
+            shoulder.rotation = Quaternion.Euler(0, 0, 315);
+        }
+        if (move.x < 0 && move.y < 0 && !isJumping)
+        {
+            anim.SetTrigger("Walking");
+            anim.SetInteger("Move Y", 1);
+            anim.SetInteger("Move X", -1);
+            sprite.flipX = true;
+            shoulder.rotation = Quaternion.Euler(0, 0, 45);
+        }
+        if (move.x == 0 && move.y > 0 && !isJumping)
+        {
+            anim.SetTrigger("Walking");
+            anim.SetInteger("Move Y", -1);
+            anim.SetInteger("Move X", 0);
+            shoulder.rotation = Quaternion.Euler(0, 0, 270);
+        }
+        if (move.x == 0 && move.y < 0 && !isJumping)
+        {
+            anim.SetTrigger("Walking");
+            anim.SetInteger("Move Y", 1);
+            anim.SetInteger("Move X", 0);
+            shoulder.rotation = Quaternion.Euler(0, 0, 90);
+        }
+        if (move.x == 0 && move.y == 0)
+        {
+            //anim.SetTrigger("Idle");
+            anim.SetInteger("Move Y", 0);
+            anim.SetInteger("Move X", 0);
+            shoulder.rotation = Quaternion.Euler(0, 0, 90);
+        }
+    }
 
     private void Get_Target_Object()
     {
@@ -115,15 +153,6 @@ public class I_am_the_player : MonoBehaviour
         if (col == null)
             Target_Object = null;
     }
-
-    private void Idle_Anim() { anim.SetTrigger("Idle"); }
-    private void StartWalking_Anim() { anim.SetTrigger("Start_Walking"); }
-    private void StartChargeThrow_Anim() { anim.SetTrigger("Finish_Throw"); }
-    private void StartJump_Anim() { anim.SetTrigger("Jump"); }
-    private void StartThrow_Anim() 
-    {        
-        anim.ResetTrigger("Charge_Throw"); 
-        anim.SetTrigger("Charge_Throw"); 
-    }
+    
 
 }
