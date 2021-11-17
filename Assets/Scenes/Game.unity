@@ -650,6 +650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2685641749475945684}
   - component: {fileID: 4366818487220025044}
+  - component: {fileID: 1106849945031986621}
   m_Layer: 0
   m_Name: Lava_DL_Corner
   m_TagString: Untagged
@@ -657,6 +658,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &1106849945031986621
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106849945031986620}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b4f96baf36fbfcf4aaaca71f23eb80cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1202838410970581441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -812,6 +832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6730863123182692490}
   - component: {fileID: 2514613163653892597}
+  - component: {fileID: 1233807607474258753}
   m_Layer: 0
   m_Name: Lava_UR_Corner
   m_TagString: Untagged
@@ -819,6 +840,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &1233807607474258753
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233807607474258752}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: efed3fe0a6dda1147a26debe73f8c388, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1280491839984720890
 Transform:
   m_ObjectHideFlags: 0
@@ -1417,7 +1457,7 @@ Animator:
   m_GameObject: {fileID: 4295672187222344389}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f876f957fa09d7047989a762e96527d4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
