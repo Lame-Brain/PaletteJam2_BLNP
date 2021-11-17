@@ -19,7 +19,7 @@ public class Player_Jump : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameManager.PLAYER.isJumping = false;
+        GameManager.PLAYER.SetJump(false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
