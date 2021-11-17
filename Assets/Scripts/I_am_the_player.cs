@@ -12,7 +12,7 @@ public class I_am_the_player : MonoBehaviour
     private SpriteRenderer sprite;
     private Vector2 move;
     private GameObject Target_Object;
-    public bool isJumping;    
+    public bool isJumping, isKicking;    
     public float action_button_held_down_timer;
     
 
@@ -47,23 +47,35 @@ public class I_am_the_player : MonoBehaviour
 
         if (Input.GetButtonUp("Fire1"))
         {
+            if (anim.GetInteger("Move Y") < 0)
+            {
+                Debug.Log("should be kicking");
+                SetJump(false);
+                move.x = 0; move.y = 0;
+                //anim.SetTrigger("Kick(Up)");
+            }
+
             Get_Target_Object();
             if (Target_Object != null)
             {
-                Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);
+                //Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);
             }
+            //Debug.Log("should be kicking");
+            //if(anim.GetInteger("Move X") != 0) anim.SetTrigger("Kick(Side)");
             
-            if(anim.GetInteger("Move X") != 0) anim.SetTrigger("Kick_Side");
-            else if (anim.GetInteger("Move Y") < 0)  anim.SetTrigger("Kick_Up");
-            else anim.SetTrigger("Kick_Down");
+            //else anim.SetTrigger("Kick(Down)");
         }
 
         if (Input.GetButtonDown("Jump"))
         {
-            isJumping = true;
-            anim.ResetTrigger("Walking");
-            anim.SetTrigger("Jump");
+            SetJump(true);
         }
+    }
+
+    public void SetJump(bool b)
+    {
+        anim.SetBool("Jumping", b);
+        isJumping = b;
     }
 
     private void FixedUpdate()
@@ -74,71 +86,63 @@ public class I_am_the_player : MonoBehaviour
 
     private void WalkStuff()
     {
-        if (move.x > 0 && move.y == 0 && !isJumping)
+        if (move.x > 0 && move.y == 0) //moving right
         {
-            anim.SetTrigger("Walking");
             anim.SetInteger("Move Y", 0);
             anim.SetInteger("Move X", 1);
             sprite.flipX = false;
             shoulder.rotation = Quaternion.Euler(0, 0, 180);
         }
-        if (move.x > 0 && move.y > 0 && !isJumping)
+        if (move.x > 0 && move.y > 0) //moving right and up
         {
-            anim.SetTrigger("Walking");
             anim.SetInteger("Move Y", 1);
             anim.SetInteger("Move X", 1);
             sprite.flipX = false;
             shoulder.rotation = Quaternion.Euler(0, 0, 225);
         }
-        if (move.x > 0 && move.y < 0 && !isJumping)
+        if (move.x > 0 && move.y < 0) //moving down and right
         {
-            anim.SetTrigger("Walking");
-            anim.SetInteger("Move Y", 1);
+            anim.SetInteger("Move Y", -1);
             anim.SetInteger("Move X", 1);
             sprite.flipX = false;
             shoulder.rotation = Quaternion.Euler(0, 0, 135);
         }
-        if (move.x < 0 && move.y == 0 && !isJumping)
+        if (move.x < 0 && move.y == 0) //Moving left
         {
-            anim.SetTrigger("Walking");
             anim.SetInteger("Move Y", 0);
             anim.SetInteger("Move X", -1);
             sprite.flipX = true;
             shoulder.rotation = Quaternion.Euler(0, 0, 0);
         }
-        if (move.x < 0 && move.y > 0 && !isJumping)
+        if (move.x < 0 && move.y > 0) //moving down and left
         {
-            anim.SetTrigger("Walking");
             anim.SetInteger("Move Y", -1);
             anim.SetInteger("Move X", -1);
             sprite.flipX = true;
             shoulder.rotation = Quaternion.Euler(0, 0, 315);
         }
-        if (move.x < 0 && move.y < 0 && !isJumping)
+        if (move.x < 0 && move.y < 0) // moving up and left
         {
-            anim.SetTrigger("Walking");
             anim.SetInteger("Move Y", 1);
             anim.SetInteger("Move X", -1);
             sprite.flipX = true;
             shoulder.rotation = Quaternion.Euler(0, 0, 45);
         }
-        if (move.x == 0 && move.y > 0 && !isJumping)
+        if (move.x == 0 && move.y > 0) // moving down
         {
-            anim.SetTrigger("Walking");
             anim.SetInteger("Move Y", -1);
             anim.SetInteger("Move X", 0);
             shoulder.rotation = Quaternion.Euler(0, 0, 270);
         }
-        if (move.x == 0 && move.y < 0 && !isJumping)
+        if (move.x == 0 && move.y < 0) //moving right
         {
-            anim.SetTrigger("Walking");
             anim.SetInteger("Move Y", 1);
             anim.SetInteger("Move X", 0);
             shoulder.rotation = Quaternion.Euler(0, 0, 90);
         }
-        if (move.x == 0 && move.y == 0)
+        if (move.x == 0 && move.y == 0) //Not moving
         {
-            //anim.SetTrigger("Idle");
+            anim.SetTrigger("Idle");
             anim.SetInteger("Move Y", 0);
             anim.SetInteger("Move X", 0);
             shoulder.rotation = Quaternion.Euler(0, 0, 90);
