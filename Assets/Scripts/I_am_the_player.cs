@@ -41,32 +41,22 @@ public class I_am_the_player : MonoBehaviour
 
     private void Update()
     {
-        move.x = Input.GetAxis("Horizontal");
-        move.y = Input.GetAxis("Vertical");
+        if(!isJumping && !isKicking) move.x = Input.GetAxis("Horizontal");
+        if (!isJumping && !isKicking) move.y = Input.GetAxis("Vertical");
         WalkStuff();
 
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1") && !isJumping && !isKicking)
         {
-            if (anim.GetInteger("Move Y") < 0)
-            {
-                Debug.Log("should be kicking");
-                SetJump(false);
-                move.x = 0; move.y = 0;
-                //anim.SetTrigger("Kick(Up)");
-            }
+            SetKick(true);
 
             Get_Target_Object();
             if (Target_Object != null)
             {
                 //Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);
             }
-            //Debug.Log("should be kicking");
-            //if(anim.GetInteger("Move X") != 0) anim.SetTrigger("Kick(Side)");
-            
-            //else anim.SetTrigger("Kick(Down)");
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && !isJumping && !isKicking)
         {
             SetJump(true);
         }
@@ -77,35 +67,37 @@ public class I_am_the_player : MonoBehaviour
         anim.SetBool("Jumping", b);
         isJumping = b;
     }
+    public void SetKick(bool b)
+    {
+        anim.SetBool("Kicking", b);
+        isKicking = b;
+    }
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + move * speed);
-
+        if(!isKicking) rb.MovePosition(rb.position + move * speed);
     }
 
     private void WalkStuff()
     {
+        if (move.x == 0 && move.y > 0) //moving up
+        {
+            anim.SetInteger("Move Y", 1);
+            anim.SetInteger("Move X", 0);
+            shoulder.rotation = Quaternion.Euler(0, 0, 270);
+        }
+        if (move.x == 0 && move.y < 0) // moving down
+        {
+            anim.SetInteger("Move Y", -1);
+            anim.SetInteger("Move X", 0);
+            shoulder.rotation = Quaternion.Euler(0, 0, 90);
+        }
         if (move.x > 0 && move.y == 0) //moving right
         {
             anim.SetInteger("Move Y", 0);
             anim.SetInteger("Move X", 1);
             sprite.flipX = false;
             shoulder.rotation = Quaternion.Euler(0, 0, 180);
-        }
-        if (move.x > 0 && move.y > 0) //moving right and up
-        {
-            anim.SetInteger("Move Y", 1);
-            anim.SetInteger("Move X", 1);
-            sprite.flipX = false;
-            shoulder.rotation = Quaternion.Euler(0, 0, 225);
-        }
-        if (move.x > 0 && move.y < 0) //moving down and right
-        {
-            anim.SetInteger("Move Y", -1);
-            anim.SetInteger("Move X", 1);
-            sprite.flipX = false;
-            shoulder.rotation = Quaternion.Euler(0, 0, 135);
         }
         if (move.x < 0 && move.y == 0) //Moving left
         {
@@ -114,31 +106,34 @@ public class I_am_the_player : MonoBehaviour
             sprite.flipX = true;
             shoulder.rotation = Quaternion.Euler(0, 0, 0);
         }
-        if (move.x < 0 && move.y > 0) //moving down and left
+        if (move.x > 0 && move.y < 0) //moving down and right
         {
             anim.SetInteger("Move Y", -1);
+            anim.SetInteger("Move X", 1);
+            sprite.flipX = false;
+            shoulder.rotation = Quaternion.Euler(0, 0, 135);
+            //Debug.Log("Moving down and right");
+        }
+        if (move.x > 0 && move.y > 0) //moving up and right
+        {
+            anim.SetInteger("Move Y", 1);
+            anim.SetInteger("Move X", 1);
+            sprite.flipX = false;
+            shoulder.rotation = Quaternion.Euler(0, 0, 225);
+        }
+        if (move.x < 0 && move.y > 0) //moving down and left
+        {
+            anim.SetInteger("Move Y", 1);
             anim.SetInteger("Move X", -1);
             sprite.flipX = true;
             shoulder.rotation = Quaternion.Euler(0, 0, 315);
         }
         if (move.x < 0 && move.y < 0) // moving up and left
         {
-            anim.SetInteger("Move Y", 1);
+            anim.SetInteger("Move Y", -1);
             anim.SetInteger("Move X", -1);
             sprite.flipX = true;
             shoulder.rotation = Quaternion.Euler(0, 0, 45);
-        }
-        if (move.x == 0 && move.y > 0) // moving down
-        {
-            anim.SetInteger("Move Y", -1);
-            anim.SetInteger("Move X", 0);
-            shoulder.rotation = Quaternion.Euler(0, 0, 270);
-        }
-        if (move.x == 0 && move.y < 0) //moving right
-        {
-            anim.SetInteger("Move Y", 1);
-            anim.SetInteger("Move X", 0);
-            shoulder.rotation = Quaternion.Euler(0, 0, 90);
         }
         if (move.x == 0 && move.y == 0) //Not moving
         {

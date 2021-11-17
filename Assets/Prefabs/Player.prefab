@@ -182,9 +182,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
-  punch_force: 0
+  punch_force: 1
   shoulder: {fileID: 3553841150881240871}
   hand: {fileID: 3553841150902841640}
+  isJumping: 0
+  isKicking: 0
   action_button_held_down_timer: 0
 --- !u!50 &3553841150490844699
 Rigidbody2D:
