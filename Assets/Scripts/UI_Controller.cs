@@ -5,13 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class UI_Controller : MonoBehaviour
 {
-    public int energy;
-    public int numOfEnergy;
-    public Image[] energys;
-    public Sprite fullEnergy;
-    public Sprite emptyEnergy;
-
-
     public static bool GameIsPaused = false;
     public GameObject pauseMenu;
     public GameObject HUD;
@@ -35,27 +28,6 @@ public class UI_Controller : MonoBehaviour
             else
             {
                 Pause();
-            }
-        }
-        #endregion
-        #region energycounter
-        for (int i = 0; i < energys.Length; i++)
-        {
-            if (i < energy)
-            {
-                energys[i].sprite = fullEnergy;
-            }
-            else
-            {
-                energys[i].sprite = emptyEnergy;
-            }
-            if (i < numOfEnergy)
-            {
-                energys[i].enabled = true;
-            }
-            else
-            {
-                energys[i].enabled = false;
             }
         }
         #endregion
