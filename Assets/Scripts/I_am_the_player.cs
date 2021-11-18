@@ -6,13 +6,14 @@ public class I_am_the_player : MonoBehaviour
 {
     public float speed, punch_force;
     public Transform shoulder, hand;
+    public bool airControl;
 
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sprite;
     private Vector2 move;
     private GameObject Target_Object;
-    public bool isJumping, isKicking;    
+    private bool isJumping, isKicking;    
     public float action_button_held_down_timer;
     
 
@@ -41,8 +42,8 @@ public class I_am_the_player : MonoBehaviour
 
     private void Update()
     {
-        if(!isJumping && !isKicking) move.x = Input.GetAxis("Horizontal");
-        if (!isJumping && !isKicking) move.y = Input.GetAxis("Vertical");
+        if (!isKicking) move.x = Input.GetAxis("Horizontal");
+        if (!isKicking) move.y = Input.GetAxis("Vertical");
         WalkStuff();
 
         if (Input.GetButtonUp("Fire1") && !isJumping && !isKicking)
@@ -76,6 +77,7 @@ public class I_am_the_player : MonoBehaviour
     private void FixedUpdate()
     {
         if(!isKicking) rb.MovePosition(rb.position + move * speed);
+        if(!isKicking && airControl) rb.MovePosition(rb.position + move * (speed / 2));
     }
 
     private void WalkStuff()
