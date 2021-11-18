@@ -6,13 +6,14 @@ public class I_am_the_player : MonoBehaviour
 {
     public float speed, punch_force;
     public Transform shoulder, hand;
+    public bool airControl;
 
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sprite;
     private Vector2 move;
     private GameObject Target_Object;
-    public bool isJumping;    
+    private bool isJumping, isKicking;    
     public float action_button_held_down_timer;
     
 
@@ -41,104 +42,104 @@ public class I_am_the_player : MonoBehaviour
 
     private void Update()
     {
-        move.x = Input.GetAxis("Horizontal");
-        move.y = Input.GetAxis("Vertical");
+        if (!isKicking) move.x = Input.GetAxis("Horizontal");
+        if (!isKicking) move.y = Input.GetAxis("Vertical");
         WalkStuff();
 
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1") && !isJumping && !isKicking)
         {
+            SetKick(true);
+
             Get_Target_Object();
             if (Target_Object != null)
             {
-                Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);
+                //Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);
             }
-            
-            if(anim.GetInteger("Move X") != 0) anim.SetTrigger("Kick_Side");
-            else if (anim.GetInteger("Move Y") < 0)  anim.SetTrigger("Kick_Up");
-            else anim.SetTrigger("Kick_Down");
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && !isJumping && !isKicking)
         {
-            isJumping = true;
-            anim.ResetTrigger("Walking");
-            anim.SetTrigger("Jump");
+            SetJump(true);
         }
+    }
+
+    public void SetJump(bool b)
+    {
+        anim.SetBool("Jumping", b);
+        isJumping = b;
+    }
+    public void SetKick(bool b)
+    {
+        anim.SetBool("Kicking", b);
+        isKicking = b;
     }
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + move * speed);
-
+        if(!isKicking) rb.MovePosition(rb.position + move * speed);
+        if(!isKicking && airControl) rb.MovePosition(rb.position + move * (speed / 2));
     }
 
     private void WalkStuff()
     {
-        if (move.x > 0 && move.y == 0 && !isJumping)
+        if (move.x == 0 && move.y > 0) //moving up
         {
-            anim.SetTrigger("Walking");
+            anim.SetInteger("Move Y", 1);
+            anim.SetInteger("Move X", 0);
+            shoulder.rotation = Quaternion.Euler(0, 0, 270);
+        }
+        if (move.x == 0 && move.y < 0) // moving down
+        {
+            anim.SetInteger("Move Y", -1);
+            anim.SetInteger("Move X", 0);
+            shoulder.rotation = Quaternion.Euler(0, 0, 90);
+        }
+        if (move.x > 0 && move.y == 0) //moving right
+        {
             anim.SetInteger("Move Y", 0);
             anim.SetInteger("Move X", 1);
             sprite.flipX = false;
             shoulder.rotation = Quaternion.Euler(0, 0, 180);
         }
-        if (move.x > 0 && move.y > 0 && !isJumping)
+        if (move.x < 0 && move.y == 0) //Moving left
         {
-            anim.SetTrigger("Walking");
-            anim.SetInteger("Move Y", 1);
-            anim.SetInteger("Move X", 1);
-            sprite.flipX = false;
-            shoulder.rotation = Quaternion.Euler(0, 0, 225);
-        }
-        if (move.x > 0 && move.y < 0 && !isJumping)
-        {
-            anim.SetTrigger("Walking");
-            anim.SetInteger("Move Y", 1);
-            anim.SetInteger("Move X", 1);
-            sprite.flipX = false;
-            shoulder.rotation = Quaternion.Euler(0, 0, 135);
-        }
-        if (move.x < 0 && move.y == 0 && !isJumping)
-        {
-            anim.SetTrigger("Walking");
             anim.SetInteger("Move Y", 0);
             anim.SetInteger("Move X", -1);
             sprite.flipX = true;
             shoulder.rotation = Quaternion.Euler(0, 0, 0);
         }
-        if (move.x < 0 && move.y > 0 && !isJumping)
+        if (move.x > 0 && move.y < 0) //moving down and right
         {
-            anim.SetTrigger("Walking");
             anim.SetInteger("Move Y", -1);
+            anim.SetInteger("Move X", 1);
+            sprite.flipX = false;
+            shoulder.rotation = Quaternion.Euler(0, 0, 135);
+            //Debug.Log("Moving down and right");
+        }
+        if (move.x > 0 && move.y > 0) //moving up and right
+        {
+            anim.SetInteger("Move Y", 1);
+            anim.SetInteger("Move X", 1);
+            sprite.flipX = false;
+            shoulder.rotation = Quaternion.Euler(0, 0, 225);
+        }
+        if (move.x < 0 && move.y > 0) //moving down and left
+        {
+            anim.SetInteger("Move Y", 1);
             anim.SetInteger("Move X", -1);
             sprite.flipX = true;
             shoulder.rotation = Quaternion.Euler(0, 0, 315);
         }
-        if (move.x < 0 && move.y < 0 && !isJumping)
+        if (move.x < 0 && move.y < 0) // moving up and left
         {
-            anim.SetTrigger("Walking");
-            anim.SetInteger("Move Y", 1);
+            anim.SetInteger("Move Y", -1);
             anim.SetInteger("Move X", -1);
             sprite.flipX = true;
             shoulder.rotation = Quaternion.Euler(0, 0, 45);
         }
-        if (move.x == 0 && move.y > 0 && !isJumping)
+        if (move.x == 0 && move.y == 0) //Not moving
         {
-            anim.SetTrigger("Walking");
-            anim.SetInteger("Move Y", -1);
-            anim.SetInteger("Move X", 0);
-            shoulder.rotation = Quaternion.Euler(0, 0, 270);
-        }
-        if (move.x == 0 && move.y < 0 && !isJumping)
-        {
-            anim.SetTrigger("Walking");
-            anim.SetInteger("Move Y", 1);
-            anim.SetInteger("Move X", 0);
-            shoulder.rotation = Quaternion.Euler(0, 0, 90);
-        }
-        if (move.x == 0 && move.y == 0)
-        {
-            //anim.SetTrigger("Idle");
+            anim.SetTrigger("Idle");
             anim.SetInteger("Move Y", 0);
             anim.SetInteger("Move X", 0);
             shoulder.rotation = Quaternion.Euler(0, 0, 90);
