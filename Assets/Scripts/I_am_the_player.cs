@@ -7,10 +7,18 @@ public class I_am_the_player : MonoBehaviour
     public float speed, punch_force;
     public Transform shoulder, hand;
     public bool airControl;
+    public AudioClip jumpSound;
+    public AudioClip deathSound;
+    public AudioClip pitSound;
+    public AudioClip lavaSound;
+    public AudioClip kickSound;
+    public AudioClip powerupSound;
+    public AudioClip spawnSound;
 
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sprite;
+    private AudioSource audio;
     private Vector2 move;
     private GameObject Target_Object;
     private bool isJumping, isKicking;    
@@ -33,6 +41,7 @@ public class I_am_the_player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         sprite = gameObject.GetComponent<SpriteRenderer>();
+        audio = gameObject.GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -60,6 +69,8 @@ public class I_am_the_player : MonoBehaviour
         if (Input.GetButtonDown("Jump") && !isJumping && !isKicking)
         {
             SetJump(true);
+            audio.clip = jumpSound;
+            audio.Play();
         }
     }
 

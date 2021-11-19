@@ -185,8 +185,14 @@ MonoBehaviour:
   punch_force: 1
   shoulder: {fileID: 3553841150881240871}
   hand: {fileID: 3553841150902841640}
-  isJumping: 0
-  isKicking: 0
+  airControl: 1
+  jumpSound: {fileID: 8300000, guid: 2b18a25b3ba95304fb39f36d7a604912, type: 3}
+  deathSound: {fileID: 8300000, guid: e7999f09a1a1129439e08100496b7af7, type: 3}
+  pitSound: {fileID: 8300000, guid: b946ec1297fb19c498d8964e5a7b539b, type: 3}
+  lavaSound: {fileID: 8300000, guid: 349e1aadef06ebd408883e1c5acb4f96, type: 3}
+  kickSound: {fileID: 8300000, guid: e8fe7117374a8ef40b102156259b278f, type: 3}
+  powerupSound: {fileID: 8300000, guid: a638f8934cd2b1f4fae06c1dc1ea4657, type: 3}
+  spawnSound: {fileID: 8300000, guid: a1c313758228c4e4b80ace5266e49df0, type: 3}
   action_button_held_down_timer: 0
 --- !u!50 &3553841150490844699
 Rigidbody2D:

@@ -427,6 +427,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3553841150490844697, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
+      propertyPath: airControl
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3553841150490844700, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
       propertyPath: m_Name
       value: Player
