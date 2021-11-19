@@ -73,15 +73,6 @@ public class PuzzleManager : MonoBehaviour
 
                     _go = Solo_Chasm_PF;
 
-                    if (_adj[0]) Debug.Log("Tile " + _x + ", " + _y + " has a tile above it");
-                    if (_adj[1]) Debug.Log("Tile " + _x + ", " + _y + " has a tile above and to the right");
-                    if (_adj[2]) Debug.Log("Tile " + _x + ", " + _y + " has a tile to the right");
-                    if (_adj[3]) Debug.Log("Tile " + _x + ", " + _y + " has a tile down and to the right");
-                    if (_adj[4]) Debug.Log("Tile " + _x + ", " + _y + " has a tile below it");
-                    if (_adj[5]) Debug.Log("Tile " + _x + ", " + _y + " has a tile below it and to the left");
-                    if (_adj[6]) Debug.Log("Tile " + _x + ", " + _y + " has a tile to the left");
-                    if (_adj[7]) Debug.Log("Tile " + _x + ", " + _y + " has a tile above and to the left");
-
                     if (_adj[0] == false && _adj[2] == true && _adj[3] == true && _adj[4] == true && _adj[6] == false) _go = UL_Chasm_PF;
                     if (_adj[0] == false && _adj[2] == true && _adj[3] == true && _adj[4] == true && _adj[5] == true && _adj[6] == true) _go = U_Chasm_PF;
                     if (_adj[0] == false && _adj[2] == false && _adj[4] == true && _adj[5] == true) _go = UR_Chasm_PF;
