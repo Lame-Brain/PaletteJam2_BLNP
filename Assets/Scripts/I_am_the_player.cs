@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class I_am_the_player : MonoBehaviour
 {
@@ -14,17 +15,16 @@ public class I_am_the_player : MonoBehaviour
     public AudioClip kickSound;
     public AudioClip powerupSound;
     public AudioClip spawnSound;
+    public AudioMixer audiomixer;
 
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sprite;
-    private AudioSource audio;
+    private AudioSource sfxaudio;
     private Vector2 move;
     private GameObject Target_Object;
     private bool isJumping, isKicking;    
     public float action_button_held_down_timer;
-    
-
 
     private void OnEnable()
     {
@@ -41,12 +41,13 @@ public class I_am_the_player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         sprite = gameObject.GetComponent<SpriteRenderer>();
-        audio = gameObject.GetComponent<AudioSource>();
+        sfxaudio = gameObject.GetComponent<AudioSource>();
     }
 
     private void Start()
     {
         GameManager.PLAYER = this;
+        GameManager.SetAudioMixer(audiomixer); //Passes the Audiomixer to the Gamemanager (debug)
     }
 
     private void Update()
@@ -58,6 +59,8 @@ public class I_am_the_player : MonoBehaviour
         if (Input.GetButtonUp("Fire1") && !isJumping && !isKicking)
         {
             SetKick(true);
+            sfxaudio.clip = kickSound;
+            sfxaudio.Play();
 
             Get_Target_Object();
             if (Target_Object != null)
@@ -69,9 +72,10 @@ public class I_am_the_player : MonoBehaviour
         if (Input.GetButtonDown("Jump") && !isJumping && !isKicking)
         {
             SetJump(true);
-            audio.clip = jumpSound;
-            audio.Play();
+            sfxaudio.clip = jumpSound;
+            sfxaudio.Play();
         }
+
     }
 
     public void SetJump(bool b)

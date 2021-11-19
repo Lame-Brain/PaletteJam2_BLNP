@@ -194,6 +194,7 @@ MonoBehaviour:
   kickSound: {fileID: 8300000, guid: e8fe7117374a8ef40b102156259b278f, type: 3}
   powerupSound: {fileID: 8300000, guid: a638f8934cd2b1f4fae06c1dc1ea4657, type: 3}
   spawnSound: {fileID: 8300000, guid: a1c313758228c4e4b80ace5266e49df0, type: 3}
+  audiomixer: {fileID: 24100000, guid: 421c0dc9a29a2b64ba512d040a59bbd6, type: 2}
   action_button_held_down_timer: 0
 --- !u!50 &3553841150490844699
 Rigidbody2D:
@@ -260,9 +261,9 @@ AudioSource:
   m_GameObject: {fileID: 3553841150490844700}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 421c0dc9a29a2b64ba512d040a59bbd6, type: 2}
   m_audioClip: {fileID: 8300000, guid: a1c313758228c4e4b80ace5266e49df0, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
