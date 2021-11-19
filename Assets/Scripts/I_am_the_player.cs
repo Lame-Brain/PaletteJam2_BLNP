@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class I_am_the_player : MonoBehaviour
 {
-    public float speed, punch_force;
+    public float speed, punch_force, currentSpeed;
     public Transform shoulder, hand;
     public bool airControl;
+	
+	public AudioClip jumpSound;
+	public AudioClip deathSound;
+	public AudioClip pitSound;
+	public AudioClip lavaSound;
+	public AudioClip kickSound;
+	public AudioClip powerupSound;
+	public AudioClip spawnSound;
 
     private Rigidbody2D rb;
     private Animator anim;
+	private AudioSource audio;
     private SpriteRenderer sprite;
     private Vector2 move;
     private GameObject Target_Object;
@@ -33,6 +42,7 @@ public class I_am_the_player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         sprite = gameObject.GetComponent<SpriteRenderer>();
+		audio = gameObject.GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -41,8 +51,10 @@ public class I_am_the_player : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (!isKicking) move.x = Input.GetAxis("Horizontal");
+    {		
+		SetJump(anim.GetCurrentAnimatorStateInfo(0).IsName("Player_Jump")); // Set our jumping trigger in our animator
+		
+		if (!isKicking) move.x = Input.GetAxis("Horizontal");
         if (!isKicking) move.y = Input.GetAxis("Vertical");
         WalkStuff();
 
@@ -56,16 +68,35 @@ public class I_am_the_player : MonoBehaviour
                 //Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);
             }
         }
-
-        if (Input.GetButtonDown("Jump") && !isJumping && !isKicking)
-        {
-            SetJump(true);
-        }
+		
+        if(!isKicking) 
+		{
+			rb.MovePosition(rb.position + move * speed);
+			currentSpeed = move.magnitude * speed;
+			anim.SetFloat("Speed", currentSpeed);
+		}
+        if(!isKicking && airControl) rb.MovePosition(rb.position + move * (speed / 2));
+		if(!isKicking && !isJumping && speed > 0.0f)	anim.SetBool("Walking", true);
     }
 
     public void SetJump(bool b)
     {
-        anim.SetBool("Jumping", b);
+        //anim.SetBool("Jump", b);
+		if(b || (Input.GetButtonDown("Jump")))
+		{
+			anim.SetTrigger("JumpingTrigger");
+			anim.SetBool("Walking", false);
+		}
+		else
+		{
+			anim.ResetTrigger("JumpingTrigger");
+			anim.SetBool("Walking", true);
+		}
+		if(!isJumping && (Input.GetButtonDown("Jump")))
+		{
+			audio.clip = jumpSound;
+			audio.Play();
+		}
         isJumping = b;
     }
     public void SetKick(bool b)
@@ -76,8 +107,7 @@ public class I_am_the_player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!isKicking) rb.MovePosition(rb.position + move * speed);
-        if(!isKicking && airControl) rb.MovePosition(rb.position + move * (speed / 2));
+		
     }
 
     private void WalkStuff()
