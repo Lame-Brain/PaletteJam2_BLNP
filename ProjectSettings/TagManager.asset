@@ -10,6 +10,8 @@ TagManager:
   - Hole
   - Pool
   - Terrain
+  - HoleSymbol
+  - PoolSymbol
   layers:
   - Default
   - TransparentFX

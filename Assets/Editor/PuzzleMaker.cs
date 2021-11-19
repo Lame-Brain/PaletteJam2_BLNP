@@ -15,6 +15,8 @@ public class PuzzleMaker : Editor
             foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Terrain")) DestroyImmediate(_go);
             foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Hole")) DestroyImmediate(_go);
             foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Pool")) DestroyImmediate(_go);
+            foreach (GameObject _go in GameObject.FindGameObjectsWithTag("HoleSymbol")) DestroyImmediate(_go);
+            foreach (GameObject _go in GameObject.FindGameObjectsWithTag("PoolSymbol")) DestroyImmediate(_go);
 
             puzzle.half_vert = Mathf.RoundToInt((puzzle.vertical_BoardSize / 2));
             puzzle.half_horz = Mathf.RoundToInt((puzzle.horizontal_BoardSize / 2));
@@ -71,9 +73,11 @@ public class PuzzleMaker : Editor
             foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Terrain")) DestroyImmediate(_go);
             foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Hole")) DestroyImmediate(_go);
             foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Pool")) DestroyImmediate(_go);
+            foreach (GameObject _go in GameObject.FindGameObjectsWithTag("HoleSymbol")) DestroyImmediate(_go);
+            foreach (GameObject _go in GameObject.FindGameObjectsWithTag("PoolSymbol")) DestroyImmediate(_go);
         }
 
-            base.OnInspectorGUI();
+        base.OnInspectorGUI();
 
     }
 }
