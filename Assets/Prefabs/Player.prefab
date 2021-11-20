@@ -209,6 +209,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 41b0d6b8a070728489da5d9f0404da8b, type: 3}
   - {fileID: 8300000, guid: 62352c65b64c3594b88fd1a0a5b86ffa, type: 3}
   audiomixer: {fileID: 24100000, guid: 421c0dc9a29a2b64ba512d040a59bbd6, type: 2}
+  extraLifePF: {fileID: 4343349060176054252, guid: 9ee7cf40bf157944eb782b3ba0d43cab, type: 3}
   action_button_held_down_timer: 0
 --- !u!50 &3553841150490844699
 Rigidbody2D:

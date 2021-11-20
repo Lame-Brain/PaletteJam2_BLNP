@@ -16,6 +16,10 @@ public static class GameManager
     public static Action<Vector2> OnBlockDeath;
     public static Action<Vector2> OnBombDeath;
 
+    public static int Lives = 3;
+    public static int currentLevel;
+    public static Vector2 lastDeathPos = new Vector2(1000,1000);
+
     public static void SetAudioMixer(AudioMixer _am)
     {
         SFX = _am;

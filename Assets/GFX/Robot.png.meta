@@ -275,6 +275,9 @@ TextureImporter:
   - first:
       213: -1911336823835835121
     second: Robot_111
+  - first:
+      213: -8773703347080225307
+    second: Robot_empty
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -2294,6 +2297,27 @@ TextureImporter:
       bones: []
       spriteID: f05442119419975e0800000000000000
       internalID: -1911336823835835121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Robot_empty
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 388
+        width: 27
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ed90a87a4b8d3680800000000000000
+      internalID: -8773703347080225307
       vertices: []
       indices: 
       edges: []

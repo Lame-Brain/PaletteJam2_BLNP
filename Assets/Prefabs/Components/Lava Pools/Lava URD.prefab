@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1427764275196100014}
   - component: {fileID: 8044574216670491336}
   - component: {fileID: 2673905549874635722}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lava URD
   m_TagString: Pool
   m_Icon: {fileID: 0}

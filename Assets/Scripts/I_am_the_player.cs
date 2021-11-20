@@ -10,16 +10,8 @@ public class I_am_the_player : MonoBehaviour
     public bool airControl;
     public float Time_before_falling_to_death, Time_before_melting_in_lava;
     public List<AudioClip> SoundFX = new List<AudioClip>();
-    //public AudioClip jumpSound;
-    //public AudioClip deathSound;
-    //public AudioClip pitSound;
-    //public AudioClip lavaSound;
-    //public AudioClip kickSound;
-    //public AudioClip powerupSound;
-    //public AudioClip spawnSound;
-    //public AudioClip BombSpawn_SFX;
-    //public AudioClip RubbleSpawn_SFX;
     public AudioMixer audiomixer;
+    public GameObject extraLifePF;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -27,8 +19,7 @@ public class I_am_the_player : MonoBehaviour
     private AudioSource sfxaudio;
     private Vector2 move;
     private GameObject Target_Object;
-    private bool isJumping, isKicking;    
-    public float action_button_held_down_timer;
+    private bool isJumping, isKicking, canControl = true;    
 
     private void OnEnable()
     {
@@ -56,36 +47,49 @@ public class I_am_the_player : MonoBehaviour
 
     private void Update()
     {
-        if (!isKicking) move.x = Input.GetAxis("Horizontal");
-        if (!isKicking) move.y = Input.GetAxis("Vertical");
-        WalkStuff();
-
-        if (Input.GetButtonUp("Fire1") && !isJumping && !isKicking)
+        if (canControl)
         {
-            SetKick(true);
-            sfxaudio.clip = FindSound("Player_Kick"); ////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            sfxaudio.Play();
+            if (!isKicking) move.x = Input.GetAxis("Horizontal");
+            if (!isKicking) move.y = Input.GetAxis("Vertical");
+            WalkStuff();
 
-            Get_Target_Object();
-            if (Target_Object != null)
-            {                
-                    Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);                
+            if (Input.GetButtonUp("Fire1") && !isJumping && !isKicking)
+            {
+                SetKick(true);
+                sfxaudio.clip = FindSound("Player_Kick");
+                sfxaudio.Play();
+
+                Get_Target_Object();
+                if (Target_Object != null)
+                {
+                    Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);
+                }
+            }
+
+            if (Input.GetButtonDown("Jump") && !isJumping && !isKicking)
+            {
+                SetJump(true);
+                sfxaudio.clip = FindSound("Player_Jump");
+                sfxaudio.Play();
             }
         }
-
-        if (Input.GetButtonDown("Jump") && !isJumping && !isKicking)
-        {
-            SetJump(true);
-            sfxaudio.clip = FindSound("Player_Jump"); ////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            sfxaudio.Play();
-        }
-
     }
 
     public void SetJump(bool b)
     {
         anim.SetBool("Jumping", b);
         isJumping = b;
+        if (isJumping) gameObject.layer = 8;
+        if (!isJumping)
+        {
+            gameObject.layer = 3;
+            Collider2D[] col = Physics2D.OverlapBoxAll(transform.position, new Vector2(1, 1), 0);
+            for (int _i = 0; _i < col.Length; _i++)
+            {
+                if (col[_i].CompareTag("Hole")) GameManager.PLAYER.Fall2Death();
+                if (col[_i].CompareTag("Pool")) GameManager.PLAYER.Melt2Death();
+            }
+        }
     }
     public void SetKick(bool b)
     {
@@ -189,14 +193,32 @@ public class I_am_the_player : MonoBehaviour
 
     public void Fall2Death()
     {
-        anim.SetTrigger("Falls");        
-        sfxaudio.clip = FindSound("Player_Pitfall"); 
-        sfxaudio.Play();
-        Destroy(gameObject);
+        if (canControl)
+        {
+            anim.SetTrigger("Falls");
+            sfxaudio.clip = FindSound("Player_Pitfall");
+            sfxaudio.Play();
+            canControl = false;
+        }
+    }
+    public void Player_Death()
+    {
+        if (canControl)
+        {
+            anim.SetTrigger("Death");
+            sfxaudio.PlayOneShot(FindSound("Player_Death"));
+            canControl = false;            
+        }
     }
 
     public void Melt2Death()
     {
-        anim.SetTrigger("Melts");
+        if (canControl)
+        {
+            anim.SetTrigger("Melts");
+            sfxaudio.clip = FindSound("Player_Lavafall");
+            sfxaudio.Play();
+            canControl = false;
+        }
     }
 }

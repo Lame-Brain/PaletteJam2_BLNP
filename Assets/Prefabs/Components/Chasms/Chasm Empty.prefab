@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6567459057442076556}
   - component: {fileID: -6607714746682576661}
   - component: {fileID: 8512088710067934403}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Chasm Empty
   m_TagString: Hole
   m_Icon: {fileID: 0}

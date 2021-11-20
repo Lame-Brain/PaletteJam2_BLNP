@@ -67,6 +67,13 @@ public class I_am_an_Object : MonoBehaviour
     {
         if(gameObject.CompareTag("Block"))GetComponent<BoxCollider2D>().isTrigger = false;
         if(gameObject.CompareTag("Bomb"))GetComponent<CircleCollider2D>().isTrigger = false;
+        Collider2D[] col = Physics2D.OverlapBoxAll(transform.position, new Vector2(1, 1), 0);
+        for (int _i = 0; _i < col.Length; _i++)
+            if (col[_i].CompareTag("Player"))
+            {
+                anim.SetTrigger("Rubble_Crumble");
+                GameManager.PLAYER.Player_Death();
+            }
     }
 
     private void ShortenFuse()

@@ -24,32 +24,50 @@ public class I_am_an_Explosion : MonoBehaviour
             if (_goRight) Instantiate(horzPF, new Vector2(_x + _i, _y), Quaternion.identity, transform);
             if (_goDown) Instantiate(vertPF, new Vector2(_x, _y + _i), Quaternion.identity, transform);
             if (_goLeft) Instantiate(horzPF, new Vector2(_x - _i, _y), Quaternion.identity, transform);
-            
-            if(_goUp) col_up = Physics2D.OverlapCircleAll(new Vector2(_x, _y - _i), 0.0f);
-            if (_goRight) col_right = Physics2D.OverlapCircleAll(new Vector2(_x + _i, _y), 0.0f);
-            if (_goDown) col_down = Physics2D.OverlapCircleAll(new Vector2(_x, _y + _i), 0.0f);
-            if (_goLeft) col_left = Physics2D.OverlapCircleAll(new Vector2(_x - _i, _y), 0.0f);
 
-            for (int _c = 0; _c < col_up.Length; _c++) if (col_up[_c].CompareTag("Block"))
+            if (_goUp) col_up = Physics2D.OverlapBoxAll(new Vector2(_x, _y - _i), new Vector2(.8f, 1), 0);
+            if (_goRight) col_right = Physics2D.OverlapBoxAll(new Vector2(_x + _i, _y), new Vector2(1, .8f), 0);
+            if (_goDown) col_down = Physics2D.OverlapBoxAll(new Vector2(_x, _y + _i), new Vector2(.8f, 1), 0);
+            if (_goLeft) col_left = Physics2D.OverlapBoxAll(new Vector2(_x - _i, _y), new Vector2(1, .8f), 0);
+            //            if (_goRight) col_right = Physics2D.OverlapCircleAll(new Vector2(_x + _i, _y), 0.0f);
+            //            if (_goDown) col_down = Physics2D.OverlapCircleAll(new Vector2(_x, _y + _i), 0.0f);
+            //            if (_goLeft) col_left = Physics2D.OverlapCircleAll(new Vector2(_x - _i, _y), 0.0f);
+
+            for (int _c = 0; _c < col_up.Length; _c++) {
+                if (col_up[_c].CompareTag("Block"))
                 {
                     _goUp = false;
                     col_up[_c].GetComponent<I_am_an_Object>().BlastMe();
                 }
-            for (int _c = 0; _c < col_right.Length; _c++) if (col_right[_c].CompareTag("Block"))
+                if (col_up[_c].CompareTag("Player")) GameManager.PLAYER.Player_Death();
+            }
+            for (int _c = 0; _c < col_right.Length; _c++)
+            {
+                if (col_right[_c].CompareTag("Block"))
                 {
                     _goRight = false;
                     col_right[_c].GetComponent<I_am_an_Object>().BlastMe();
                 }
-            for (int _c = 0; _c < col_down.Length; _c++) if (col_down[_c].CompareTag("Block"))
+                if (col_right[_c].CompareTag("Player")) GameManager.PLAYER.Player_Death();
+            }
+            for (int _c = 0; _c < col_down.Length; _c++)
+            {
+                if (col_down[_c].CompareTag("Block"))
                 {
                     _goDown = false;
                     col_down[_c].GetComponent<I_am_an_Object>().BlastMe();
                 }
-            for (int _c = 0; _c < col_left.Length; _c++) if (col_left[_c].CompareTag("Block"))
+                if (col_down[_c].CompareTag("Player")) GameManager.PLAYER.Player_Death();
+            }
+            for (int _c = 0; _c < col_left.Length; _c++)
+            {
+                if (col_left[_c].CompareTag("Block"))
                 {
                     _goLeft = false;
                     col_left[_c].GetComponent<I_am_an_Object>().BlastMe();
                 }
+                if (col_left[_c].CompareTag("Player")) GameManager.PLAYER.Player_Death();
+            }
         }
     }
 }
