@@ -83,7 +83,7 @@ public class I_am_the_player : MonoBehaviour
         if (!isJumping)
         {
             gameObject.layer = 3;
-            Collider2D[] col = Physics2D.OverlapBoxAll(transform.position, new Vector2(1, 1), 0);
+            Collider2D[] col = Physics2D.OverlapBoxAll(transform.position, new Vector2(.5f, .5f), 0);
             for (int _i = 0; _i < col.Length; _i++)
             {
                 if (col[_i].CompareTag("Hole")) GameManager.PLAYER.Fall2Death();
@@ -195,10 +195,15 @@ public class I_am_the_player : MonoBehaviour
     {
         if (canControl)
         {
+            canControl = false;
+            move = Vector2.zero;
+            anim.SetBool("Jumping", false);
+            anim.SetBool("Kicking", false);
+            anim.SetInteger("Move X", 0);
+            anim.SetInteger("Move Y", 0);
             anim.SetTrigger("Falls");
             sfxaudio.clip = FindSound("Player_Pitfall");
-            sfxaudio.Play();
-            canControl = false;
+            sfxaudio.Play();            
         }
     }
     public void Player_Death()
@@ -215,6 +220,12 @@ public class I_am_the_player : MonoBehaviour
     {
         if (canControl)
         {
+            canControl = false;
+            move = Vector2.zero;
+            anim.SetBool("Jumping", false);
+            anim.SetBool("Kicking", false);
+            anim.SetInteger("Move X", 0);
+            anim.SetInteger("Move Y", 0);
             anim.SetTrigger("Melts");
             sfxaudio.clip = FindSound("Player_Lavafall");
             sfxaudio.Play();

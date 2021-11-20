@@ -29,9 +29,6 @@ public class I_am_an_Explosion : MonoBehaviour
             if (_goRight) col_right = Physics2D.OverlapBoxAll(new Vector2(_x + _i, _y), new Vector2(1, .8f), 0);
             if (_goDown) col_down = Physics2D.OverlapBoxAll(new Vector2(_x, _y + _i), new Vector2(.8f, 1), 0);
             if (_goLeft) col_left = Physics2D.OverlapBoxAll(new Vector2(_x - _i, _y), new Vector2(1, .8f), 0);
-            //            if (_goRight) col_right = Physics2D.OverlapCircleAll(new Vector2(_x + _i, _y), 0.0f);
-            //            if (_goDown) col_down = Physics2D.OverlapCircleAll(new Vector2(_x, _y + _i), 0.0f);
-            //            if (_goLeft) col_left = Physics2D.OverlapCircleAll(new Vector2(_x - _i, _y), 0.0f);
 
             for (int _c = 0; _c < col_up.Length; _c++) {
                 if (col_up[_c].CompareTag("Block"))
@@ -40,6 +37,7 @@ public class I_am_an_Explosion : MonoBehaviour
                     col_up[_c].GetComponent<I_am_an_Object>().BlastMe();
                 }
                 if (col_up[_c].CompareTag("Player")) GameManager.PLAYER.Player_Death();
+                if (col_up[_c].CompareTag("Bomb")) col_up[_c].GetComponent<I_am_an_Object>().Boom();
             }
             for (int _c = 0; _c < col_right.Length; _c++)
             {
@@ -49,6 +47,7 @@ public class I_am_an_Explosion : MonoBehaviour
                     col_right[_c].GetComponent<I_am_an_Object>().BlastMe();
                 }
                 if (col_right[_c].CompareTag("Player")) GameManager.PLAYER.Player_Death();
+                if (col_right[_c].CompareTag("Bomb")) col_right[_c].GetComponent<I_am_an_Object>().Boom();
             }
             for (int _c = 0; _c < col_down.Length; _c++)
             {
@@ -58,6 +57,7 @@ public class I_am_an_Explosion : MonoBehaviour
                     col_down[_c].GetComponent<I_am_an_Object>().BlastMe();
                 }
                 if (col_down[_c].CompareTag("Player")) GameManager.PLAYER.Player_Death();
+                if (col_down[_c].CompareTag("Bomb")) col_down[_c].GetComponent<I_am_an_Object>().Boom();
             }
             for (int _c = 0; _c < col_left.Length; _c++)
             {
@@ -67,6 +67,7 @@ public class I_am_an_Explosion : MonoBehaviour
                     col_left[_c].GetComponent<I_am_an_Object>().BlastMe();
                 }
                 if (col_left[_c].CompareTag("Player")) GameManager.PLAYER.Player_Death();
+                if (col_left[_c].CompareTag("Bomb")) col_left[_c].GetComponent<I_am_an_Object>().Boom();
             }
         }
     }

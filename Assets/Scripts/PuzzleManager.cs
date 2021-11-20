@@ -24,7 +24,7 @@ public class PuzzleManager : MonoBehaviour
     public GameObject Holes, UL_Chasm_PF, U_Chasm_PF, UR_Chasm_PF, L_Chasm_PF, C_Chasm_PF, R_Chasm_PF, DL_Chasm_PF, D_Chasm_PF, DR_Chasm_PF, UL_ChasmCorner_PF, UR_ChasmCorner_PF, DL_ChasmCorner_PF, DR_ChasmCorner_PF, Solo_Chasm_PF;
     public GameObject Pools, UL_Lava_PF, U_Lava_PF, UR_Lava_PF, L_Lava_PF, C1_Lava_PF, C2_Lava_PF, C3_Lava_PF, R_Lava_PF, DL_Lava_PF, D_Lava_PF, DR_Lava_PF, UL_LavaCorner_PF, UR_LavaCorner_PF, DL_LavaCorner_PF, DR_LavaCorner_PF, Solo_Lava_PF;
     public GameObject[,] floor_map;
-    public GameObject UL_Wall_PF, U_Wall_PF, UR_Wall_PF, L_Wall_PF, R_Wall_PF, DL_Wall_PF, D_Wall_PF, DR_Wall_PF;
+    public GameObject UL_Wall_PF, U_Wall_PF, UR_Wall_PF, L_Wall_PF, R_Wall_PF, DL_Wall_PF, D_Wall_PF, DR_Wall_PF, Rubble_PF, Bomb_PF;
     public Transform Floors_transform;
     public Transform Walls_transform;
     public Transform Waves_transform;
@@ -34,6 +34,9 @@ public class PuzzleManager : MonoBehaviour
     [HideInInspector]
     public int Number_of_Waves, current_Wave, half_vert, half_horz;
     public int[,] TileGrid;
+
+    private string PLAYSTATE;
+    private bool countdownFinished = false;
 
 
     private void Start()
@@ -133,19 +136,125 @@ public class PuzzleManager : MonoBehaviour
 
         foreach (GameObject _gob in GameObject.FindGameObjectsWithTag("HoleSymbol")) DestroyImmediate(_gob);
         foreach (GameObject _gob in GameObject.FindGameObjectsWithTag("PoolSymbol")) DestroyImmediate(_gob);
+
+        PLAYSTATE = "Initial Countdown";
+        ResetCountDown();
     }
 
     private void SpawnWave()
     {
-        if(current_Wave < Number_of_Waves)
+        int _count = 0;
+        int _rx, _ry;
+        bool canSpawn = false;
+        Vector2 candidate_pos = Vector2.zero;
+        List<Vector2> ReservedTiles = new List<Vector2>(); ReservedTiles.Clear();
+        for (int _ly = 0; _ly < vertical_BoardSize; _ly++)
+            for (int _lx = 0; _lx < horizontal_BoardSize; _lx++)
+                if (TileGrid[_lx, _ly] == 1 || TileGrid[_lx, _ly] == 2)
+                    ReservedTiles.Add(new Vector2(_lx, _ly)); //Add pits and holes to reserved list
+        foreach(GameObject _go in GameObject.FindGameObjectsWithTag("Block"))
+            ReservedTiles.Add(new Vector2(_go.transform.position.x + half_horz, transform.position.y + half_vert)); // add existing blocks to reserved list
+
+        if (PLAYSTATE == "Spawn Rubble")
         {
+            _count = Waves_transform.GetChild(current_Wave).GetComponent<I_am_a_Wave>().num_of_rubble_drops;
+
+            for (int _i = 0; _i < _count; _i++)
+            {
+                _rx = Random.Range(0, horizontal_BoardSize);
+                _ry = Random.Range(0, vertical_BoardSize);
+                canSpawn = false;
+                for (int _c = 0; _c < 10; _c++)
+                {
+                    candidate_pos = new Vector2(_rx, _ry);
+                    if (!ReservedTiles.Contains(candidate_pos))
+                    {
+                        ReservedTiles.Add(candidate_pos);
+                        canSpawn = true;
+                        _c = 11;
+                    }
+                    else if (ReservedTiles.Contains(candidate_pos))
+                    {
+                        _rx = Random.Range(0, horizontal_BoardSize);
+                        _ry = Random.Range(0, vertical_BoardSize);
+                    }
+                }
+                if (canSpawn) Instantiate(Rubble_PF, new Vector2(candidate_pos.x - half_horz, candidate_pos.y - half_vert), Quaternion.identity);
+            }
+
+        }
+
+        if(PLAYSTATE == "Spawn Bombs")
+        {
+            _count = Waves_transform.GetChild(current_Wave).GetComponent<I_am_a_Wave>().num_of_bombs;
+
+            for (int _i = 0; _i < _count; _i++)
+            {
+                _rx = Random.Range(0, horizontal_BoardSize);
+                _ry = Random.Range(0, vertical_BoardSize);
+                canSpawn = false;
+                for (int _c = 0; _c < 10; _c++)
+                {
+                    candidate_pos = new Vector2(_rx, _ry);
+                    if (!ReservedTiles.Contains(candidate_pos))
+                    {
+                        ReservedTiles.Add(candidate_pos);
+                        canSpawn = true;
+                        _c = 11;
+                    }
+                    else if (ReservedTiles.Contains(candidate_pos))
+                    {
+                        _rx = Random.Range(0, horizontal_BoardSize);
+                        _ry = Random.Range(0, vertical_BoardSize);
+                    }
+                }
+                if (canSpawn) Instantiate(Bomb_PF, new Vector2(candidate_pos.x - half_horz, candidate_pos.y - half_vert), Quaternion.identity);
+            }
+        }
+        
+    }
+
+    private void Update()
+    {
+        if (!countdownFinished && PLAYSTATE == "Initial Countdown") CountDown(5);
+        if (countdownFinished && PLAYSTATE == "Initial Countdown")
+        {
+            PLAYSTATE = "Spawn Rubble";
+            SpawnWave();
+            ResetCountDown();
+            CountDown(Waves_transform.GetChild(current_Wave).GetComponent<I_am_a_Wave>().wave_time);
+        }
+        if (countdownFinished && PLAYSTATE == "Spawn Rubble")
+        {
+            PLAYSTATE = "Spawn Bombs";
+            SpawnWave();
+            ResetCountDown();
+            CountDown(Waves_transform.GetChild(current_Wave).GetComponent<I_am_a_Wave>().wave_time);
+        }
+        if(PLAYSTATE == "Spawn Bombs" && GameObject.FindGameObjectsWithTag("Bomb").Length == 0)
+        {
+            PLAYSTATE = "Next Wave";
             current_Wave++;
-            //generate rubble drops. Rotate them randomly
-            //generate bomb drops.
+            CountDown(5);
+            if (current_Wave < Number_of_Waves)
+            {
+                PLAYSTATE = "Initial Countdown";
+            }
+            else
+            {
+                //next scene
+                Debug.Log("Load the next scene");
+            }
         }
-        else
-        {
-            //Finish level
-        }
+    }
+
+    public void ResetCountDown()
+    {
+        countdownFinished = false;
+    }
+
+    public void CountDown(float delay)
+    {
+        countdownFinished = true;
     }
 }

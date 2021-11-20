@@ -89,7 +89,6 @@ public class I_am_an_Object : MonoBehaviour
 
     public void DefuseBomb()
     {
-        Debug.Log("This bomb is moving? " + isMoving);
         if (!isMoving)
         {
             Destroy(gameObject);
