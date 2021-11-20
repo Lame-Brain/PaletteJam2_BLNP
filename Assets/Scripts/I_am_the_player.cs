@@ -19,7 +19,9 @@ public class I_am_the_player : MonoBehaviour
     private AudioSource sfxaudio;
     private Vector2 move;
     private GameObject Target_Object;
-    private bool isJumping, isKicking, canControl = true;    
+    private bool isJumping, isKicking;
+    [HideInInspector]
+    public bool canControl = true;
 
     private void OnEnable()
     {

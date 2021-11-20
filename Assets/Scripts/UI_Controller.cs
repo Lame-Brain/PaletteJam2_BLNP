@@ -9,6 +9,8 @@ public class UI_Controller : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject HUD;
 
+    public TMPro.TextMeshProUGUI lives, waves, timer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,37 +33,54 @@ public class UI_Controller : MonoBehaviour
             }
         }
         #endregion
+        #region HUD hook-ups
+        lives.text = GameManager.Lives.ToString();
+        if (GameManager.PUZZLE.current_Wave < GameManager.PUZZLE.Number_of_Waves)
+            waves.text = "WAVE : " + (GameManager.PUZZLE.current_Wave + 1).ToString();
+        else
+            waves.text = "NEXT";
+        timer.text = GameManager.PUZZLE.Timer.ToString("F2");
+        #endregion
     }
     public void Resume()
     {
         pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
         GameIsPaused = false;
+        GameManager.PauseGame(GameIsPaused);
         HUD.SetActive(true);
     }
     public void Pause()
     {
         pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
         GameIsPaused = true;
+        GameManager.PauseGame(GameIsPaused);
         HUD.SetActive(false);
     }
     public void LoadMenu()
     {
-        Time.timeScale = 1f;
         GameIsPaused = false;
+        GameManager.PauseGame(GameIsPaused);
         SceneManager.LoadScene("MainMenu");
 
     }
      public void Retry()
     {
         GameIsPaused = false;
-        Time.timeScale = 1f;
+        GameManager.PauseGame(GameIsPaused);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
     }
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void Music_Volume_Slider(Slider slider)
+    {
+        GameManager.SetMusicVolumeLevel(slider.value);
+    }
+    public void SFX_Volume_Slider(Slider slider)
+    {
+        GameManager.SetSFX_VolumeLevel(slider.value);
     }
 }

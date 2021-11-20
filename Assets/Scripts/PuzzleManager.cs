@@ -33,6 +33,9 @@ public class PuzzleManager : MonoBehaviour
 
     [HideInInspector]
     public int Number_of_Waves, current_Wave, half_vert, half_horz;
+    [HideInInspector]
+    public float Timer;
+    [HideInInspector]
     public int[,] TileGrid;
 
     private string PLAYSTATE;
