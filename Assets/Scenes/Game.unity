@@ -5592,10 +5592,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3350863982878560387, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3553841150490844695, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5640,33 +5636,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3553841150490844696, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3553841150490844697, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
-      propertyPath: SFX
-      value: 
-      objectReference: {fileID: 24100000, guid: 421c0dc9a29a2b64ba512d040a59bbd6, type: 2}
-    - target: {fileID: 3553841150490844697, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
-      propertyPath: airControl
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3553841150490844700, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8491447558774644934, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8491447558774644934, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 6424242400018281489, guid: 421c0dc9a29a2b64ba512d040a59bbd6, type: 2}
-    - target: {fileID: 8610457625562206067, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53bbf38f13212de46a0d2d2ea775e668, type: 3}

@@ -170,5 +170,10 @@ public class I_am_the_player : MonoBehaviour
             Target_Object = null;
     }
     
+    public void PlayerLifeUp()
+    {
+        sfxaudio.clip = powerupSound;
+        sfxaudio.Play();
+    }
 
 }

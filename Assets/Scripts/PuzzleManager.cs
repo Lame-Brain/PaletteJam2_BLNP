@@ -96,7 +96,6 @@ public class PuzzleManager : MonoBehaviour
                     if (_y > 0 && TileGrid[_x, _y - 1] == 2) _adj[0] = true;
                     if (_x < mx && _y > 0 && TileGrid[_x + 1, _y - 1] == 2) _adj[1] = true;
                     if (_x < mx && TileGrid[_x + 1, _y] == 2) _adj[2] = true;
-                    Debug.Log("_x = " + _x + ", _y = " + _y + ", mx = " + mx + ", my = " + my);
                     if (_x < mx && _y < my && TileGrid[_x + 1, _y + 1] == 2) _adj[3] = true;
                     if (_y < my && TileGrid[_x, _y + 1] == 2) _adj[4] = true;
                     if (_x > 0 && _y < my && TileGrid[_x - 1, _y + 1] == 2) _adj[5] = true;
