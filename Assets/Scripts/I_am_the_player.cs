@@ -8,13 +8,17 @@ public class I_am_the_player : MonoBehaviour
     public float speed, punch_force;
     public Transform shoulder, hand;
     public bool airControl;
-    public AudioClip jumpSound;
-    public AudioClip deathSound;
-    public AudioClip pitSound;
-    public AudioClip lavaSound;
-    public AudioClip kickSound;
-    public AudioClip powerupSound;
-    public AudioClip spawnSound;
+    public float Time_before_falling_to_death, Time_before_melting_in_lava;
+    public List<AudioClip> SoundFX = new List<AudioClip>();
+    //public AudioClip jumpSound;
+    //public AudioClip deathSound;
+    //public AudioClip pitSound;
+    //public AudioClip lavaSound;
+    //public AudioClip kickSound;
+    //public AudioClip powerupSound;
+    //public AudioClip spawnSound;
+    //public AudioClip BombSpawn_SFX;
+    //public AudioClip RubbleSpawn_SFX;
     public AudioMixer audiomixer;
 
     private Rigidbody2D rb;
@@ -59,20 +63,20 @@ public class I_am_the_player : MonoBehaviour
         if (Input.GetButtonUp("Fire1") && !isJumping && !isKicking)
         {
             SetKick(true);
-            sfxaudio.clip = kickSound;
+            sfxaudio.clip = FindSound("Player_Kick"); ////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             sfxaudio.Play();
 
             Get_Target_Object();
             if (Target_Object != null)
-            {
-                //Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);
+            {                
+                    Target_Object.GetComponent<I_am_an_Object>().PunchMe(punch_force, shoulder.rotation);                
             }
         }
 
         if (Input.GetButtonDown("Jump") && !isJumping && !isKicking)
         {
             SetJump(true);
-            sfxaudio.clip = jumpSound;
+            sfxaudio.clip = FindSound("Player_Jump"); ////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             sfxaudio.Play();
         }
 
@@ -164,16 +168,35 @@ public class I_am_the_player : MonoBehaviour
     private void Get_Target_Object()
     {
         Collider2D col = Physics2D.OverlapCircle(hand.position, 0.0f);
-        if (col != null) 
-            Target_Object = col.gameObject;
+        if (col != null)
+            if ((col.CompareTag("Block") || col.CompareTag("Bomb"))) Target_Object = col.gameObject;
         if (col == null)
             Target_Object = null;
+    }
+
+    public AudioClip FindSound(string _name)
+    {
+        AudioClip result = null;
+        foreach (AudioClip _ac in SoundFX) if (_ac.name == _name) result = _ac;
+        return result;
     }
     
     public void PlayerLifeUp()
     {
-        sfxaudio.clip = powerupSound;
+        sfxaudio.clip = FindSound("1Up_Collect"); 
         sfxaudio.Play();
     }
 
+    public void Fall2Death()
+    {
+        anim.SetTrigger("Falls");        
+        sfxaudio.clip = FindSound("Player_Pitfall"); 
+        sfxaudio.Play();
+        Destroy(gameObject);
+    }
+
+    public void Melt2Death()
+    {
+        anim.SetTrigger("Melts");
+    }
 }

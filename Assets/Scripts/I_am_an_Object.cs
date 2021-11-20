@@ -6,15 +6,17 @@ public class I_am_an_Object : MonoBehaviour
 {
     private Transform target;
     public Transform angle;
-    public GameObject Death_Effect;
+    public GameObject Explosion_PF;
     const int Player_Layer = 3, Object_Layer = 6;
     private float Health = 5;
     private Rigidbody2D rb;
     private bool isMoving;
+    private Animator anim;
 
     private void Start()
     {
         gameObject.layer = Object_Layer;
+        anim = gameObject.GetComponent<Animator>(); 
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -29,33 +31,61 @@ public class I_am_an_Object : MonoBehaviour
             }            
         }
     }
-
     public void PunchMe(float f, Quaternion r)
     {
         if (gameObject.CompareTag("Bomb")) 
         {
             angle.rotation = r;
-            rb.AddForce(r * Vector2.left * 5000000, ForceMode2D.Impulse);
-            isMoving = true;
+            rb.AddForce(r * Vector2.left * 7500000, ForceMode2D.Impulse);
+            isMoving = true;            
         }
         if (gameObject.CompareTag("Block"))
         {
-            Health -= f;
-            if(Health <= 0)
+            Health -= f;            
+            if (Health <= 0)
             {
-                //GameManager.OnBlockDeath(transform.position);
-                Debug.Log("Block dead");
-                Destroy(gameObject);
+                anim.SetTrigger("Rubble_Crumble");
+                GameManager.PLAYER.GetComponent<AudioSource>().clip = GameManager.PLAYER.FindSound("Rubble_Break2");
+                GameManager.PLAYER.GetComponent<AudioSource>().Play();
             }
             else
             {
-                //Call Block hit animation trigger
+                anim.SetTrigger("Rubble_Hurt");
+                GameManager.PLAYER.GetComponent<AudioSource>().clip = GameManager.PLAYER.FindSound("Rubble_Break");
+                GameManager.PLAYER.GetComponent<AudioSource>().Play();
             }
         }
+    }
+    public void BlastMe()
+    {
+        anim.SetTrigger("Rubble_Crumble");
+        GameManager.PLAYER.GetComponent<AudioSource>().clip = GameManager.PLAYER.FindSound("Rubble_Break2");
+        GameManager.PLAYER.GetComponent<AudioSource>().Play();
+    }
+
+    public void Land()
+    {
+        if(gameObject.CompareTag("Block"))GetComponent<BoxCollider2D>().isTrigger = false;
+        if(gameObject.CompareTag("Bomb"))GetComponent<CircleCollider2D>().isTrigger = false;
     }
 
     private void ShortenFuse()
     {
+        if (gameObject.tag == "Bomb") anim.SetTrigger("Short_Fuse");
+    }
 
+    public void Boom()
+    {
+        Instantiate(Explosion_PF, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
+    public void DefuseBomb()
+    {
+        Debug.Log("This bomb is moving? " + isMoving);
+        if (!isMoving)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -7,7 +7,7 @@ public class Play_PlayerSpawnSFX : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       GameManager.PLAYER.GetComponent<AudioSource>().clip = GameManager.PLAYER.spawnSound;
+       GameManager.PLAYER.GetComponent<AudioSource>().clip = GameManager.PLAYER.FindSound("Bomb_Spawn");
        GameManager.PLAYER.GetComponent<AudioSource>().Play();
     }
 

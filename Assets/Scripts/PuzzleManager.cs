@@ -5,6 +5,9 @@ using UnityEditor;
 
 public class PuzzleManager : MonoBehaviour
 {
+    [Header("NAME OF LEVEL")]
+    public string LevelName;
+
     [Header("THESE HAVE TO BE ODD VALUES")]
     public int horizontal_BoardSize;
     public int vertical_BoardSize;
@@ -12,6 +15,8 @@ public class PuzzleManager : MonoBehaviour
     [Header("    ")]
     public int Number_of_Holes;
     public int Number_of_LavaPools;
+
+
     //public float line_ratio, box_ratio, ell_ratio, bolt_ratio, tee_ratio;
 
     [Header("---<<< Ignore Below This Line >>>---")]
