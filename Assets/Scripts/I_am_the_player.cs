@@ -19,7 +19,7 @@ public class I_am_the_player : MonoBehaviour
     private AudioSource sfxaudio;
     private Vector2 move;
     private GameObject Target_Object;
-    private bool isJumping, isKicking;
+    public bool isJumping, isKicking;
     [HideInInspector]
     public bool canControl = true;
 
@@ -75,6 +75,14 @@ public class I_am_the_player : MonoBehaviour
                 sfxaudio.Play();
             }
         }
+
+        if(Input.GetKeyUp(KeyCode.Tab))
+        {
+            if (!UI_Controller.GameIsPaused)
+                FindObjectOfType<UI_Controller>().Pause();
+            else
+                FindObjectOfType<UI_Controller>().Resume();
+        }
     }
 
     public void SetJump(bool b)
@@ -97,6 +105,7 @@ public class I_am_the_player : MonoBehaviour
     {
         anim.SetBool("Kicking", b);
         isKicking = b;
+        //Debug.Log("KICK CALLED: " + b);
     }
 
     private void FixedUpdate()
@@ -138,8 +147,7 @@ public class I_am_the_player : MonoBehaviour
             anim.SetInteger("Move Y", -1);
             anim.SetInteger("Move X", 1);
             sprite.flipX = false;
-            shoulder.rotation = Quaternion.Euler(0, 0, 135);
-            //Debug.Log("Moving down and right");
+            shoulder.rotation = Quaternion.Euler(0, 0, 135);            
         }
         if (move.x > 0 && move.y > 0) //moving up and right
         {

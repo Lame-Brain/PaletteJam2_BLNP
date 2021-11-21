@@ -158,7 +158,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 11
   m_Sprite: {fileID: 17426746270384133, guid: cfe4f029c9742c04192f3e06f0271cd0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cbd09e08b1da04d8d876495d4372ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.075
+  speed: 0.1
   punch_force: 1
   shoulder: {fileID: 3553841150881240871}
   hand: {fileID: 3553841150902841640}
@@ -210,7 +210,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 62352c65b64c3594b88fd1a0a5b86ffa, type: 3}
   audiomixer: {fileID: 24100000, guid: 421c0dc9a29a2b64ba512d040a59bbd6, type: 2}
   extraLifePF: {fileID: 4343349060176054252, guid: 9ee7cf40bf157944eb782b3ba0d43cab, type: 3}
-  action_button_held_down_timer: 0
+  canControl: 1
 --- !u!50 &3553841150490844699
 Rigidbody2D:
   serializedVersion: 4

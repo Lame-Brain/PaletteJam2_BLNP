@@ -12,6 +12,7 @@ TagManager:
   - Terrain
   - HoleSymbol
   - PoolSymbol
+  - UIController
   layers:
   - Default
   - TransparentFX
@@ -20,9 +21,9 @@ TagManager:
   - Water
   - UI
   - Object
-  - Pit
-  - Jumping_Player
-  - Wall
+  - 
+  - 
+  - 
   - 
   - 
   - 
