@@ -241,6 +241,7 @@ public class PuzzleManager : MonoBehaviour
             {
                 //next scene
                 Debug.Log("Load the next scene");
+                GameManager.PLAYER.GottaDance();
             }
         }
     }

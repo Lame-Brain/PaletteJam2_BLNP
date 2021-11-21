@@ -278,4 +278,21 @@ public class I_am_the_player : MonoBehaviour
             canControl = true;
         }
     }
+
+    public void GottaDance()
+    {
+        canControl = false;
+        rb.velocity = Vector2.zero;
+        move = Vector2.zero;
+        SetDead(false);
+        SetKick(false);
+        SetJump(false);
+        anim.SetInteger("Move Y", 0);
+        anim.SetInteger("Move X", 0);
+        anim.ResetTrigger("Death");
+        anim.ResetTrigger("Falls");
+        anim.ResetTrigger("Melts");
+        anim.ResetTrigger("Respawn");
+        anim.SetTrigger("Dance");
+    }
 }
