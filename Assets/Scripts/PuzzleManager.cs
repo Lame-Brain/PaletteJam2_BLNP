@@ -45,9 +45,13 @@ public class PuzzleManager : MonoBehaviour
     public Vector2 PlayerSpawn;
     private List<Vector2Int> ReservedPos = new List<Vector2Int>();
 
-    private void Start()
+    private void Awake()
     {
         GameManager.PUZZLE = this;
+    }
+
+    private void Start()
+    {        
         PlayerSpawn = GameManager.PLAYER.transform.position;
         Number_of_Waves = Waves_transform.childCount;
         current_Wave = 0;
