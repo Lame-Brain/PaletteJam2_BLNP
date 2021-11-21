@@ -44,7 +44,7 @@ public class I_am_the_player : MonoBehaviour
     private void Start()
     {
         GameManager.PLAYER = this;
-        GameManager.SetAudioMixer(audiomixer); //Passes the Audiomixer to the Gamemanager (debug)        
+        //GameManager.SetAudioMixer(audiomixer); //Passes the Audiomixer to the Gamemanager (debug)        
     }
 
     private void Update()
