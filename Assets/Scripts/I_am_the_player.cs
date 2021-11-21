@@ -19,7 +19,7 @@ public class I_am_the_player : MonoBehaviour
     private AudioSource sfxaudio;
     private Vector2 move;
     private GameObject Target_Object;
-    public bool isJumping, isKicking;
+    private bool isJumping, isKicking, isDead;
     [HideInInspector]
     public bool canControl = true;
 
@@ -44,7 +44,7 @@ public class I_am_the_player : MonoBehaviour
     private void Start()
     {
         GameManager.PLAYER = this;
-        GameManager.SetAudioMixer(audiomixer); //Passes the Audiomixer to the Gamemanager (debug)
+        GameManager.SetAudioMixer(audiomixer); //Passes the Audiomixer to the Gamemanager (debug)        
     }
 
     private void Update()
@@ -83,6 +83,16 @@ public class I_am_the_player : MonoBehaviour
             else
                 FindObjectOfType<UI_Controller>().Resume();
         }
+
+        //DEBUG KEYS
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            Respawn();
+        }
+        if (Input.GetKeyUp(KeyCode.N))
+        {
+            GameManager.NextLevel();
+        }
     }
 
     public void SetJump(bool b)
@@ -106,6 +116,12 @@ public class I_am_the_player : MonoBehaviour
         anim.SetBool("Kicking", b);
         isKicking = b;
         //Debug.Log("KICK CALLED: " + b);
+    }
+
+    public void SetDead(bool b)
+    {
+        anim.SetBool("Dead", b);
+        isDead = b;
     }
 
     private void FixedUpdate()
@@ -206,6 +222,7 @@ public class I_am_the_player : MonoBehaviour
         if (canControl)
         {
             canControl = false;
+            SetDead(true);
             move = Vector2.zero;
             anim.SetBool("Jumping", false);
             anim.SetBool("Kicking", false);
@@ -222,7 +239,8 @@ public class I_am_the_player : MonoBehaviour
         {
             anim.SetTrigger("Death");
             sfxaudio.PlayOneShot(FindSound("Player_Death"));
-            canControl = false;            
+            canControl = false;
+            SetDead(true);
         }
     }
 
@@ -231,6 +249,7 @@ public class I_am_the_player : MonoBehaviour
         if (canControl)
         {
             canControl = false;
+            SetDead(true);
             move = Vector2.zero;
             anim.SetBool("Jumping", false);
             anim.SetBool("Kicking", false);
@@ -241,5 +260,44 @@ public class I_am_the_player : MonoBehaviour
             sfxaudio.Play();
             canControl = false;
         }
+    }
+
+    public void Respawn()
+    {
+        if(GameManager.Lives > 0)
+        {
+            GameManager.Lives--;
+            rb.velocity = Vector2.zero;
+            move = Vector2.zero;
+            SetDead(false);
+            SetKick(false);
+            SetJump(false);
+            anim.SetInteger("Move Y", 0);
+            anim.SetInteger("Move X", 0);
+            anim.ResetTrigger("Death");
+            anim.ResetTrigger("Falls");
+            anim.ResetTrigger("Melts");
+            anim.ResetTrigger("Dance");
+            anim.SetTrigger("Respawn");
+            transform.position = GameManager.PUZZLE.PlayerSpawn;
+            canControl = true;
+        }
+    }
+
+    public void GottaDance()
+    {
+        canControl = false;
+        rb.velocity = Vector2.zero;
+        move = Vector2.zero;
+        SetDead(false);
+        SetKick(false);
+        SetJump(false);
+        anim.SetInteger("Move Y", 0);
+        anim.SetInteger("Move X", 0);
+        anim.ResetTrigger("Death");
+        anim.ResetTrigger("Falls");
+        anim.ResetTrigger("Melts");
+        anim.ResetTrigger("Respawn");
+        anim.SetTrigger("Dance");
     }
 }

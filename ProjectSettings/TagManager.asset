@@ -13,6 +13,7 @@ TagManager:
   - HoleSymbol
   - PoolSymbol
   - UIController
+  - Bat
   layers:
   - Default
   - TransparentFX

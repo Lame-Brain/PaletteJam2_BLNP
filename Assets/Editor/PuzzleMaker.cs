@@ -6,6 +6,8 @@ using UnityEditor;
 [CustomEditor(typeof(PuzzleManager))]
 public class PuzzleMaker : Editor
 {
+    private List<Vector2> ReservedPos = new List<Vector2>();
+
     public override void OnInspectorGUI()
     {
         PuzzleManager puzzle = (PuzzleManager)target;
@@ -52,20 +54,28 @@ public class PuzzleMaker : Editor
             Instantiate(puzzle.DL_Wall_PF, new Vector3((puzzle.half_horz * -1) - 1, (puzzle.half_vert * -1) - 1, 0), Quaternion.identity, puzzle.Walls_transform);
             Instantiate(puzzle.DR_Wall_PF, new Vector3((puzzle.half_horz + 1),      (puzzle.half_vert * -1) - 1, 0), Quaternion.identity, puzzle.Walls_transform);
 
-            puzzle.Number_of_Waves = puzzle.Waves_transform.childCount;
-            puzzle.current_Wave = 1;
-
+            //            puzzle.Number_of_Waves = puzzle.Waves_transform.childCount;
+            //            puzzle.current_Wave = 1;
+            ReservedPos.Clear();
+            ReservedPos.Add(new Vector2(0, 0));
             if (puzzle.Number_of_Holes > 0)
                 for (int _i = 0; _i < puzzle.Number_of_Holes; _i++)
+                {
                     Instantiate(puzzle.Holes,
-                                new Vector3(Random.Range(-puzzle.half_horz, puzzle.half_horz), Random.Range(-puzzle.half_vert, puzzle.half_vert), 0),
-                                Quaternion.identity, puzzle.Holes_transform);
+                              FindValidPos(puzzle.half_horz, puzzle.half_vert),
+                              Quaternion.identity, puzzle.Holes_transform);                    
+                }
+//                    Instantiate(puzzle.Holes,
+//                                new Vector3(Random.Range(-puzzle.half_horz, puzzle.half_horz), Random.Range(-puzzle.half_vert, puzzle.half_vert), 0),
+//                                Quaternion.identity, puzzle.Holes_transform);
 
             if (puzzle.Number_of_LavaPools > 0)
                 for (int _i = 0; _i < puzzle.Number_of_LavaPools; _i++)
+                {
                     Instantiate(puzzle.Pools,
-                                new Vector3(Random.Range(-puzzle.half_horz, puzzle.half_horz), Random.Range(-puzzle.half_vert, puzzle.half_vert), 0),
-                                Quaternion.identity, puzzle.Pools_transform);
+                              FindValidPos(puzzle.half_horz, puzzle.half_vert),
+                              Quaternion.identity, puzzle.Holes_transform);
+                }
         }
 
         if (GUILayout.Button("Clear Play Area"))
@@ -79,5 +89,21 @@ public class PuzzleMaker : Editor
 
         base.OnInspectorGUI();
 
+    }
+
+    private Vector3 FindValidPos(int bx, int by)
+    {
+        bool _done = false;
+        Vector3 canidatePos = Vector3.up;
+        while (!_done)
+        {
+            canidatePos = new Vector3(Random.Range(-bx, bx), Random.Range(-by, by), 0);
+            if (!ReservedPos.Contains(canidatePos))
+            {
+                _done = true;
+                ReservedPos.Add(canidatePos);
+            }
+        }
+        return canidatePos;
     }
 }

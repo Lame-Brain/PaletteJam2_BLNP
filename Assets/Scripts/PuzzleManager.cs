@@ -16,6 +16,7 @@ public class PuzzleManager : MonoBehaviour
     public int Number_of_Holes;
     public int Number_of_LavaPools;
 
+    public float time_between_scenes;
 
     //public float line_ratio, box_ratio, ell_ratio, bolt_ratio, tee_ratio;
 
@@ -40,11 +41,14 @@ public class PuzzleManager : MonoBehaviour
 
     private string PLAYSTATE;
     private bool countdownFinished = false;
-
+    [HideInInspector]
+    public Vector2 PlayerSpawn;
+    private List<Vector2Int> ReservedPos = new List<Vector2Int>();
 
     private void Start()
     {
         GameManager.PUZZLE = this;
+        PlayerSpawn = GameManager.PLAYER.transform.position;
         Number_of_Waves = Waves_transform.childCount;
         current_Wave = 0;
         half_vert = Mathf.RoundToInt(vertical_BoardSize / 2);
@@ -141,48 +145,28 @@ public class PuzzleManager : MonoBehaviour
         foreach (GameObject _gob in GameObject.FindGameObjectsWithTag("PoolSymbol")) DestroyImmediate(_gob);
 
         PLAYSTATE = "Initial Countdown";
-        ResetCountDown();
+        Timer = time_between_scenes;
+        countdownFinished = false;
     }
 
     private void SpawnWave()
     {
+        ReservedPos.Clear();
+        ReservedPos.Add(new Vector2Int((int)PlayerSpawn.x, (int)PlayerSpawn.y)); //Add player spawn to reserved list
+        foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Hole")) ReservedPos.Add(new Vector2Int((int)_go.transform.position.x, (int)_go.transform.position.y)); //Add Holes to reserved list
+        foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Pool")) ReservedPos.Add(new Vector2Int((int)_go.transform.position.x, (int)_go.transform.position.y)); //Add Pools to reserved list
+        foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Block")) ReservedPos.Add(new Vector2Int((int)_go.transform.position.x, (int)_go.transform.position.y)); //Add Rubble to reserved list
+
         int _count = 0;
-        int _rx, _ry;
-        bool canSpawn = false;
-        Vector2 candidate_pos = Vector2.zero;
-        List<Vector2> ReservedTiles = new List<Vector2>(); ReservedTiles.Clear();
-        for (int _ly = 0; _ly < vertical_BoardSize; _ly++)
-            for (int _lx = 0; _lx < horizontal_BoardSize; _lx++)
-                if (TileGrid[_lx, _ly] == 1 || TileGrid[_lx, _ly] == 2)
-                    ReservedTiles.Add(new Vector2(_lx, _ly)); //Add pits and holes to reserved list
-        foreach(GameObject _go in GameObject.FindGameObjectsWithTag("Block"))
-            ReservedTiles.Add(new Vector2(_go.transform.position.x + half_horz, transform.position.y + half_vert)); // add existing blocks to reserved list
 
         if (PLAYSTATE == "Spawn Rubble")
         {
+            GameObject _go;
             _count = Waves_transform.GetChild(current_Wave).GetComponent<I_am_a_Wave>().num_of_rubble_drops;
 
             for (int _i = 0; _i < _count; _i++)
             {
-                _rx = Random.Range(0, horizontal_BoardSize);
-                _ry = Random.Range(0, vertical_BoardSize);
-                canSpawn = false;
-                for (int _c = 0; _c < 10; _c++)
-                {
-                    candidate_pos = new Vector2(_rx, _ry);
-                    if (!ReservedTiles.Contains(candidate_pos))
-                    {
-                        ReservedTiles.Add(candidate_pos);
-                        canSpawn = true;
-                        _c = 11;
-                    }
-                    else if (ReservedTiles.Contains(candidate_pos))
-                    {
-                        _rx = Random.Range(0, horizontal_BoardSize);
-                        _ry = Random.Range(0, vertical_BoardSize);
-                    }
-                }
-                if (canSpawn) Instantiate(Rubble_PF, new Vector2(candidate_pos.x - half_horz, candidate_pos.y - half_vert), Quaternion.identity);
+                _go = Instantiate(Rubble_PF, FindValidPos(half_horz, half_vert), Quaternion.identity);
             }
 
         }
@@ -193,52 +177,69 @@ public class PuzzleManager : MonoBehaviour
 
             for (int _i = 0; _i < _count; _i++)
             {
-                _rx = Random.Range(0, horizontal_BoardSize);
-                _ry = Random.Range(0, vertical_BoardSize);
-                canSpawn = false;
-                for (int _c = 0; _c < 10; _c++)
-                {
-                    candidate_pos = new Vector2(_rx, _ry);
-                    if (!ReservedTiles.Contains(candidate_pos))
-                    {
-                        ReservedTiles.Add(candidate_pos);
-                        canSpawn = true;
-                        _c = 11;
-                    }
-                    else if (ReservedTiles.Contains(candidate_pos))
-                    {
-                        _rx = Random.Range(0, horizontal_BoardSize);
-                        _ry = Random.Range(0, vertical_BoardSize);
-                    }
-                }
-                if (canSpawn) Instantiate(Bomb_PF, new Vector2(candidate_pos.x - half_horz, candidate_pos.y - half_vert), Quaternion.identity);
+                Instantiate(Bomb_PF, FindValidPos(half_horz, half_vert), Quaternion.identity);
+
             }
-        }
-        
+        }        
     }
+
+    private Vector2 FindValidPos(int bx, int by)
+    {
+        bool _done = false, _inList;
+        Vector2Int canidatePos = new Vector2Int(1000000, 1000000);
+        float timeout = 0;
+        while (!_done || timeout < 15)
+        {
+            canidatePos = new Vector2Int(Random.Range(-bx, bx), Random.Range(-by, by));
+
+            _inList = false;
+            for (int _i = 0; _i < ReservedPos.Count; _i++)
+                if (canidatePos.x == ReservedPos[_i].x && canidatePos.y == ReservedPos[_i].y) _inList = true;
+
+            if (!_inList)
+            {
+                _done = true;
+                ReservedPos.Add(canidatePos);
+                return canidatePos;
+            }
+            timeout++;
+        }
+        return new Vector2Int(1000000, 1000000);
+    }
+
+
 
     private void Update()
     {
-        if (!countdownFinished && PLAYSTATE == "Initial Countdown") CountDown(5);
+        if (!countdownFinished)
+        {
+            Timer -= Time.deltaTime;
+            if (Timer <= 0) countdownFinished = true;
+        }
+
         if (countdownFinished && PLAYSTATE == "Initial Countdown")
         {
             PLAYSTATE = "Spawn Rubble";
             SpawnWave();
-            ResetCountDown();
-            CountDown(Waves_transform.GetChild(current_Wave).GetComponent<I_am_a_Wave>().wave_time);
+            countdownFinished = false;
+            Timer = Waves_transform.GetChild(current_Wave).GetComponent<I_am_a_Wave>().wave_time;
         }
+
         if (countdownFinished && PLAYSTATE == "Spawn Rubble")
         {
             PLAYSTATE = "Spawn Bombs";
             SpawnWave();
-            ResetCountDown();
-            CountDown(Waves_transform.GetChild(current_Wave).GetComponent<I_am_a_Wave>().wave_time);
+            countdownFinished = false;
+            Timer = 0; // Waves_transform.GetChild(current_Wave).GetComponent<I_am_a_Wave>().wave_time;
         }
-        if(PLAYSTATE == "Spawn Bombs" && GameObject.FindGameObjectsWithTag("Bomb").Length == 0)
+
+        if (PLAYSTATE == "Spawn Bombs" && GameObject.FindGameObjectsWithTag("Bomb").Length == 0)
         {
             PLAYSTATE = "Next Wave";
             current_Wave++;
-            CountDown(5);
+            Timer = time_between_scenes;
+            countdownFinished = false;
+
             if (current_Wave < Number_of_Waves)
             {
                 PLAYSTATE = "Initial Countdown";
@@ -247,17 +248,9 @@ public class PuzzleManager : MonoBehaviour
             {
                 //next scene
                 Debug.Log("Load the next scene");
+                GameManager.PLAYER.GottaDance();
             }
         }
     }
 
-    public void ResetCountDown()
-    {
-        countdownFinished = false;
-    }
-
-    public void CountDown(float delay)
-    {
-        countdownFinished = true;
-    }
 }
