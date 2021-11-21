@@ -74,7 +74,7 @@ public class PuzzleMaker : Editor
                 {
                     Instantiate(puzzle.Pools,
                               FindValidPos(puzzle.half_horz, puzzle.half_vert),
-                              Quaternion.identity, puzzle.Holes_transform);
+                              Quaternion.identity, puzzle.Pools_transform);
                 }
         }
 

@@ -16,7 +16,7 @@ public class PuzzleManager : MonoBehaviour
     public int Number_of_Holes;
     public int Number_of_LavaPools;
 
-    public float time_between_scenes;
+    public float time_before_start;
 
     //public float line_ratio, box_ratio, ell_ratio, bolt_ratio, tee_ratio;
 
@@ -145,7 +145,7 @@ public class PuzzleManager : MonoBehaviour
         foreach (GameObject _gob in GameObject.FindGameObjectsWithTag("PoolSymbol")) DestroyImmediate(_gob);
 
         PLAYSTATE = "Initial Countdown";
-        Timer = time_between_scenes;
+        Timer = time_before_start;
         countdownFinished = false;
     }
 
@@ -237,7 +237,7 @@ public class PuzzleManager : MonoBehaviour
         {
             PLAYSTATE = "Next Wave";
             current_Wave++;
-            Timer = time_between_scenes;
+            Timer = time_before_start;
             countdownFinished = false;
 
             if (current_Wave < Number_of_Waves)
