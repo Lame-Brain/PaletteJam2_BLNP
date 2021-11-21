@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/Behaviors/BombBoom.cs.meta
+guid: f0ffc8ac1ab80df40b022112d6cb4ba8
+=======
+guid: 4bce15a5cf9758b49a136e5a89e9888e
+>>>>>>> 8ca808c (HP and pause):Assets/Scripts/UI_Controller.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

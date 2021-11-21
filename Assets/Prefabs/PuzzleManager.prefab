@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &406684385203962484
+--- !u!1 &5604857505415271407
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,90 +8,33 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6042139612139827129}
+  - component: {fileID: 5604857505415271406}
   m_Layer: 0
-  m_Name: Holes
+  m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6042139612139827129
+--- !u!4 &5604857505415271406
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 406684385203962484}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1202838410028920844}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1101550171695464027
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3673705261401088076}
-  m_Layer: 0
-  m_Name: LavaPools
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3673705261401088076
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1101550171695464027}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1202838410028920844}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1202838409096195765
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1202838409096195764}
-  m_Layer: 0
-  m_Name: Waves
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1202838409096195764
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202838409096195765}
+  m_GameObject: {fileID: 5604857505415271407}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1202838409361096297}
-  m_Father: {fileID: 1202838410028920844}
-  m_RootOrder: 2
+  - {fileID: 5604857507172547900}
+  - {fileID: 5604857506342281934}
+  - {fileID: 1054087414029065825}
+  - {fileID: 8035191829186679188}
+  m_Father: {fileID: 5604857506514371028}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1202838409361096294
+--- !u!1 &5604857506342281935
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,87 +42,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1202838409361096297}
-  - component: {fileID: 1202838409361096296}
-  m_Layer: 0
-  m_Name: Wave (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1202838409361096297
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202838409361096294}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1202838409096195764}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1202838409361096296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202838409361096294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7ec3668fecee7e47a9909a6d3032a35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  num_of_rubble_drops: 3
-  num_of_bombs: 3
-  line_ratio: 1
-  box_ratio: 1
-  ell_ratio: 1
-  bolt_ratio: 1
-  tee_ratio: 1
---- !u!1 &1202838409495956709
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1202838409495956708}
-  m_Layer: 0
-  m_Name: Floor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1202838409495956708
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202838409495956709}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1202838410028920844}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1202838409789707031
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1202838409789707030}
+  - component: {fileID: 5604857506342281934}
   m_Layer: 0
   m_Name: Walls
   m_TagString: Untagged
@@ -187,21 +50,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1202838409789707030
+--- !u!4 &5604857506342281934
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202838409789707031}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 5604857506342281935}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1202838410028920844}
+  m_Father: {fileID: 5604857505415271406}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1202838410028920845
+--- !u!1 &5604857506514371029
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,8 +72,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1202838410028920844}
-  - component: {fileID: 1202838410028920847}
+  - component: {fileID: 5604857506514371028}
+  - component: {fileID: 5604857506514371031}
   m_Layer: 0
   m_Name: PuzzleManager
   m_TagString: GameController
@@ -218,63 +81,356 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1202838410028920844
+--- !u!4 &5604857506514371028
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202838410028920845}
+  m_GameObject: {fileID: 5604857506514371029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1202838409495956708}
-  - {fileID: 1202838409789707030}
-  - {fileID: 1202838409096195764}
-  - {fileID: 6042139612139827129}
-  - {fileID: 3673705261401088076}
+  - {fileID: 5604857506772770668}
+  - {fileID: 5604857505415271406}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1202838410028920847
+--- !u!114 &5604857506514371031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202838410028920845}
+  m_GameObject: {fileID: 5604857506514371029}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dffb2be19cb89204ebdb39b24ee38308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontal_BoardSize: 19
+  LevelName: An Introduction to Puzzles
+  horizontal_BoardSize: 7
   vertical_BoardSize: 7
-  Number_of_Holes: 0
+  Number_of_Holes: 5
   Number_of_LavaPools: 0
-  line_ratio: 0
-  box_ratio: 0
-  ell_ratio: 0
-  bolt_ratio: 0
-  tee_ratio: 0
+  time_before_start: 0
   floortiles:
   - {fileID: 8547836523756260848, guid: beaab67e41fdfb848a238f9ad9490e0e, type: 3}
   - {fileID: 4913203759843490883, guid: ca282f698f99a67489fcda6551fbc453, type: 3}
   - {fileID: 3766358165912426499, guid: 397cdcd1dd5bfbf45ac4299527fdaf94, type: 3}
   - {fileID: 2487315336205455690, guid: f9a09519bc9589a41ab93bb928b5e5b8, type: 3}
-  Walls:
-  - {fileID: 8841783834902713643, guid: bc2c44c83e9e4d74ca9f2de87f5d65dc, type: 3}
-  Holes:
-  - {fileID: 107715321017313163, guid: 14c7da4dc171d3b4ebec30c4e5f20d66, type: 3}
-  Pools:
-  - {fileID: 7382215648215470064, guid: b7049b3f0bb868d49b19c82440b87447, type: 3}
-  Floors_transform: {fileID: 1202838409495956708}
-  Walls_transform: {fileID: 1202838409789707030}
-  Waves_transform: {fileID: 1202838409096195764}
-  Holes_transform: {fileID: 6042139612139827129}
-  Pools_transform: {fileID: 3673705261401088076}
-  Number_of_Waves: 0
-  current_Wave: 0
-  half_vert: 0
-  half_horz: 0
+  Holes: {fileID: 107715321017313163, guid: 14c7da4dc171d3b4ebec30c4e5f20d66, type: 3}
+  UL_Chasm_PF: {fileID: 2811524439400189401, guid: a6be41ab6716c094fbbffcfb9203b90f, type: 3}
+  U_Chasm_PF: {fileID: 1950933394582734627, guid: b34ef9485f7387943b14a530eb47bd28, type: 3}
+  UR_Chasm_PF: {fileID: 2863568687181249709, guid: 4d15574f20818494c9546d6d213292d2, type: 3}
+  L_Chasm_PF: {fileID: 7110141390253836160, guid: 6f0aac5e23d91704eb2e44a921cc34d1, type: 3}
+  C_Chasm_PF: {fileID: 9011797563541378067, guid: 70161b88ead59d54a90a64ccd4603fea, type: 3}
+  R_Chasm_PF: {fileID: 976742427501080423, guid: f8ae1f403cfd16e49be964c3322efec3, type: 3}
+  DL_Chasm_PF: {fileID: 5016356376355618731, guid: 8c06bdf762c30fb4698df550a8ca0f6e, type: 3}
+  D_Chasm_PF: {fileID: 2545180491971683505, guid: 903350311988d034fa4d5671ff8f6e6f, type: 3}
+  DR_Chasm_PF: {fileID: 8440296008646986796, guid: ca630f3466fca9b4e80452747b6211ef, type: 3}
+  UL_ChasmCorner_PF: {fileID: 7724544761467499975, guid: 6940ed6cfad3a9445a7b9f250d6e9392, type: 3}
+  UR_ChasmCorner_PF: {fileID: 9143166727155670539, guid: 44dc6cc199de0fc40a2b0a096c2e8efc, type: 3}
+  DL_ChasmCorner_PF: {fileID: 4623674205800065764, guid: 6ca85bb17c22b2f419ed72070ff1feb8, type: 3}
+  DR_ChasmCorner_PF: {fileID: 315469852801952780, guid: 6532dd4fec58ca14e9b05807b3073566, type: 3}
+  Solo_Chasm_PF: {fileID: 8803155293171204729, guid: e046dd9022332c4479ff30f7e5196771, type: 3}
+  Pools: {fileID: 7382215648215470064, guid: b7049b3f0bb868d49b19c82440b87447, type: 3}
+  UL_Lava_PF: {fileID: 166273880728412147, guid: e9173fcbfdff424438c0e4a5f311d037, type: 3}
+  U_Lava_PF: {fileID: 1161663188654158560, guid: 6cd7a194b01717e4d8031ae3668e34f9, type: 3}
+  UR_Lava_PF: {fileID: 534214547152661970, guid: 510cc7992ea27cb4a89aa23f46e70d40, type: 3}
+  L_Lava_PF: {fileID: 3861977977408581759, guid: 6509c43201de56c4a9b8fcfa8e6c0f74, type: 3}
+  C1_Lava_PF: {fileID: 3765925250637916921, guid: 9978ea345b693014cbbb416bdd9dee59, type: 3}
+  C2_Lava_PF: {fileID: 6979189045257161296, guid: 33bfe20a7fcc90944aab0e43e923bdeb, type: 3}
+  C3_Lava_PF: {fileID: 5518447674049291456, guid: fafc54b538cb7614f8ec4cf62f40b722, type: 3}
+  R_Lava_PF: {fileID: 5393783967588632640, guid: d61ab7db08a131744977c3a3d038d4fd, type: 3}
+  DL_Lava_PF: {fileID: 7213329163638070678, guid: 7f637ffc38e5aed4290843fe07420d82, type: 3}
+  D_Lava_PF: {fileID: 822808586465258809, guid: f2d732beab6cd024db110725447b2981, type: 3}
+  DR_Lava_PF: {fileID: 1512468117335590515, guid: c6a1a54e7c571f449a8ee8255f023c4c, type: 3}
+  UL_LavaCorner_PF: {fileID: 2507177767402633207, guid: cca0d7cae30a6214ea575b4440327f97, type: 3}
+  UR_LavaCorner_PF: {fileID: 3657460340571971430, guid: 2cde177b85f67ee4cad47a16a5966c91, type: 3}
+  DL_LavaCorner_PF: {fileID: 3738465546671897379, guid: d45c84675be3a0b4c87493fd7461bd6b, type: 3}
+  DR_LavaCorner_PF: {fileID: 6832969456551133596, guid: 1af49330e2d409a42a675bf1b3957108, type: 3}
+  Solo_Lava_PF: {fileID: 3480255034079168984, guid: 7f684cb0668b3844a9219380e50c884b, type: 3}
+  UL_Wall_PF: {fileID: 2102320086280049230, guid: da2c1a2ec28df4c4880ae3cfc8f56a8d, type: 3}
+  U_Wall_PF: {fileID: 4957496916341304297, guid: 80ab7306613f5374ca3315056c4772d1, type: 3}
+  UR_Wall_PF: {fileID: 1481284343832121725, guid: 24960dc16954c924089e46743f335d3f, type: 3}
+  L_Wall_PF: {fileID: 6754302370759106713, guid: 3424ad74f96731d47bc7cf54120fc796, type: 3}
+  R_Wall_PF: {fileID: 1782409249441565075, guid: 4d1efd28e6e3d55468977ff86f476bdb, type: 3}
+  DL_Wall_PF: {fileID: 6110611372125401953, guid: 5f8d58691c6898d4f9bccf2b45c03c13, type: 3}
+  D_Wall_PF: {fileID: 7960328275624044954, guid: 31ba61a485cc51c448a8978510efd342, type: 3}
+  DR_Wall_PF: {fileID: 3000505977276230178, guid: 148ee07b45d820b4b94e59cccc6b8945, type: 3}
+  Rubble_PF: {fileID: 8392238840841465129, guid: 1198bc2d65274d141becc2506d86adaf, type: 3}
+  Bomb_PF: {fileID: 241553737365168516, guid: 5625661db7b3a8b459dff2c64d61c2f3, type: 3}
+  Floors_transform: {fileID: 5604857507172547900}
+  Walls_transform: {fileID: 5604857506342281934}
+  Waves_transform: {fileID: 5604857506772770668}
+  Holes_transform: {fileID: 1054087414029065825}
+  Pools_transform: {fileID: 8035191829186679188}
+  Number_of_Waves: 1
+  current_Wave: 1
+  half_vert: 3
+  half_horz: 3
+  Timer: 0
+  PlayerSpawn: {x: 0, y: 0}
+--- !u!1 &5604857506587108273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5604857506587108272}
+  - component: {fileID: 5604857506587108275}
+  m_Layer: 0
+  m_Name: Wave (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5604857506587108272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604857506587108273}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5604857506772770668}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5604857506587108275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604857506587108273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ec3668fecee7e47a9909a6d3032a35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num_of_rubble_drops: 6
+  num_of_bombs: 6
+  wave_time: 5
+--- !u!1 &5604857506772770669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5604857506772770668}
+  m_Layer: 0
+  m_Name: Waves
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5604857506772770668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604857506772770669}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5604857507037663153}
+  - {fileID: 5604857506587108272}
+  - {fileID: 5604857507154203263}
+  m_Father: {fileID: 5604857506514371028}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5604857507037663166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5604857507037663153}
+  - component: {fileID: 5604857507037663152}
+  m_Layer: 0
+  m_Name: Wave (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5604857507037663153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604857507037663166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5604857506772770668}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5604857507037663152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604857507037663166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ec3668fecee7e47a9909a6d3032a35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num_of_rubble_drops: 3
+  num_of_bombs: 3
+  wave_time: 5
+--- !u!1 &5604857507154203260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5604857507154203263}
+  - component: {fileID: 5604857507154203262}
+  m_Layer: 0
+  m_Name: Wave (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5604857507154203263
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604857507154203260}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5604857506772770668}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5604857507154203262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604857507154203260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ec3668fecee7e47a9909a6d3032a35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num_of_rubble_drops: 9
+  num_of_bombs: 9
+  wave_time: 5
+--- !u!1 &5604857507172547901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5604857507172547900}
+  m_Layer: 0
+  m_Name: Floor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5604857507172547900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604857507172547901}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5604857505415271406}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5922335861708230531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8035191829186679188}
+  m_Layer: 0
+  m_Name: LavaPools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8035191829186679188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5922335861708230531}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5604857505415271406}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6403545097778459564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1054087414029065825}
+  m_Layer: 0
+  m_Name: Holes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1054087414029065825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6403545097778459564}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5604857505415271406}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class I_am_the_Camera : MonoBehaviour
 {
-    public Transform target;
-    public bool FollowTarget;
-    public float Camera_Move_Speed;
-    public float how_long_should_the_screen_shake;
+    private Transform target;
+    private bool FollowTarget = true;
+    private float Camera_Move_Speed = .5f;
+    private float how_long_should_the_screen_shake = .5f;
 
     private bool screen_shaking;
     private float screen_shake_amount;
+    private void Awake()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     private void FixedUpdate()
     {
