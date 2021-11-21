@@ -43,7 +43,7 @@ public class PuzzleManager : MonoBehaviour
     private bool countdownFinished = false;
     [HideInInspector]
     public Vector2 PlayerSpawn;
-    private List<Vector2> ReservedPos = new List<Vector2>();
+    private List<Vector2Int> ReservedPos = new List<Vector2Int>();
 
     private void Start()
     {
@@ -152,20 +152,21 @@ public class PuzzleManager : MonoBehaviour
     private void SpawnWave()
     {
         ReservedPos.Clear();
-        ReservedPos.Add(PlayerSpawn);//Add player spawn to reserved list
-        foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Hole")) ReservedPos.Add(new Vector2(_go.transform.position.x, _go.transform.position.y)); //Add Holes to reserved list
-        foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Pool")) ReservedPos.Add(new Vector2(_go.transform.position.x, _go.transform.position.y)); //Add Pools to reserved list
-        foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Block")) ReservedPos.Add(new Vector2(_go.transform.position.x, _go.transform.position.y)); //Add Rubble to reserved list
+        ReservedPos.Add(new Vector2Int((int)PlayerSpawn.x, (int)PlayerSpawn.y)); //Add player spawn to reserved list
+        foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Hole")) ReservedPos.Add(new Vector2Int((int)_go.transform.position.x, (int)_go.transform.position.y)); //Add Holes to reserved list
+        foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Pool")) ReservedPos.Add(new Vector2Int((int)_go.transform.position.x, (int)_go.transform.position.y)); //Add Pools to reserved list
+        foreach (GameObject _go in GameObject.FindGameObjectsWithTag("Block")) ReservedPos.Add(new Vector2Int((int)_go.transform.position.x, (int)_go.transform.position.y)); //Add Rubble to reserved list
 
         int _count = 0;
 
         if (PLAYSTATE == "Spawn Rubble")
         {
+            GameObject _go;
             _count = Waves_transform.GetChild(current_Wave).GetComponent<I_am_a_Wave>().num_of_rubble_drops;
 
             for (int _i = 0; _i < _count; _i++)
             {
-                Instantiate(Rubble_PF, FindValidPos(half_horz, half_vert), Quaternion.identity);
+                _go = Instantiate(Rubble_PF, FindValidPos(half_horz, half_vert), Quaternion.identity);
             }
 
         }
@@ -184,20 +185,26 @@ public class PuzzleManager : MonoBehaviour
 
     private Vector2 FindValidPos(int bx, int by)
     {
-        bool _done = false;
-        Vector2 canidatePos = new Vector2(1000000, 1000000);
+        bool _done = false, _inList;
+        Vector2Int canidatePos = new Vector2Int(1000000, 1000000);
         float timeout = 0;
         while (!_done || timeout < 15)
         {
-            canidatePos = new Vector3(Random.Range(-bx, bx), Random.Range(-by, by));
-            if (!ReservedPos.Contains(canidatePos))
+            canidatePos = new Vector2Int(Random.Range(-bx, bx), Random.Range(-by, by));
+
+            _inList = false;
+            for (int _i = 0; _i < ReservedPos.Count; _i++)
+                if (canidatePos.x == ReservedPos[_i].x && canidatePos.y == ReservedPos[_i].y) _inList = true;
+
+            if (!_inList)
             {
                 _done = true;
                 ReservedPos.Add(canidatePos);
+                return canidatePos;
             }
             timeout++;
         }
-        return canidatePos;
+        return new Vector2Int(1000000, 1000000);
     }
 
 
