@@ -84,9 +84,14 @@ public class I_am_the_player : MonoBehaviour
                 FindObjectOfType<UI_Controller>().Resume();
         }
 
+        //DEBUG KEYS
         if (Input.GetKeyUp(KeyCode.R))
         {
             Respawn();
+        }
+        if (Input.GetKeyUp(KeyCode.N))
+        {
+            GameManager.NextLevel();
         }
     }
 

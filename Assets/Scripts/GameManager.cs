@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
+using UnityEngine.SceneManagement;
 
 public static class GameManager
 {
@@ -20,6 +21,8 @@ public static class GameManager
     public static int currentLevel;
 
     public static int lastLevelReached;
+
+    public static object SceneManagment { get; private set; }
 
     #region Audio Stuff
     public static void SetAudioMixer(AudioMixer _am)
@@ -61,6 +64,19 @@ public static class GameManager
         else
         {
             Time.timeScale = 1f;
+        }
+    }
+
+    public static void NextLevel()
+    {
+        if (Application.CanStreamedLevelBeLoaded(SceneManager.GetActiveScene().buildIndex + 1))
+        {
+            CheckLastLevelReached(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);            
+        }
+        else
+        {
+            //WIN GAME I GUESS?
         }
     }
 }
