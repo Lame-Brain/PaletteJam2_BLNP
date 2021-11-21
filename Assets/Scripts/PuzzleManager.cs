@@ -51,7 +51,7 @@ public class PuzzleManager : MonoBehaviour
     }
 
     private void Start()
-    {        
+    {
         PlayerSpawn = GameManager.PLAYER.transform.position;
         Number_of_Waves = Waves_transform.childCount;
         current_Wave = 0;
