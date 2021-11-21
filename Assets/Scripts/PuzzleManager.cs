@@ -243,7 +243,10 @@ public class PuzzleManager : MonoBehaviour
             current_Wave++;
             Timer = time_before_start;
             countdownFinished = false;
+        }
 
+        if(countdownFinished && PLAYSTATE == "Next Wave")
+        {
             if (current_Wave < Number_of_Waves)
             {
                 PLAYSTATE = "Initial Countdown";
