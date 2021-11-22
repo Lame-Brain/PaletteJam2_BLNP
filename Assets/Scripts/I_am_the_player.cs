@@ -113,7 +113,7 @@ public class I_am_the_player : MonoBehaviour
     {
         anim.SetBool("Dead", b);
         isDead = b;
-        FindObjectOfType<UI_Controller>().Show_Death_Screen();
+        if(b) FindObjectOfType<UI_Controller>().Show_Death_Screen();
     }
 
     private void FixedUpdate()

@@ -18,7 +18,7 @@ public class MainMenu_Controller : MonoBehaviour
     private void Start()
     {
         levelNumber = 1;
-        Level_Number.text = levelNumber.ToString();
+        Level_Number.text = "0" + levelNumber.ToString();
         Locked_Icon.SetActive(false);
     }
 
@@ -29,7 +29,9 @@ public class MainMenu_Controller : MonoBehaviour
         if (levelNumber > SceneManager.sceneCountInBuildSettings - 1) levelNumber = 1;
         if (levelNumber < 1) levelNumber = SceneManager.sceneCountInBuildSettings - 1;
 
-        Level_Number.text = levelNumber.ToString();
+        Level_Number.text = "";
+        if (levelNumber < 10) Level_Number.text = "0";
+        Level_Number.text += levelNumber.ToString();
 
         if (levelNumber > GameManager.lastLevelReached) 
             Locked_Icon.SetActive(true);

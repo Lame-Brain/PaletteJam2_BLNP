@@ -8,7 +8,7 @@ public class I_am_an_Object : MonoBehaviour
     public Transform angle;
     public GameObject Explosion_PF;
     const int Player_Layer = 3, Object_Layer = 6;
-    private float Health = 5;
+    private float Health, MaxHealth;
     private Rigidbody2D rb;
     private bool isMoving;
     private Animator anim;
@@ -18,6 +18,7 @@ public class I_am_an_Object : MonoBehaviour
         gameObject.layer = Object_Layer;
         anim = gameObject.GetComponent<Animator>(); 
         rb = gameObject.GetComponent<Rigidbody2D>();
+        MaxHealth = 5; Health = MaxHealth;
     }
 
     private void Update()
@@ -50,7 +51,9 @@ public class I_am_an_Object : MonoBehaviour
             }
             else
             {
-                anim.SetTrigger("Rubble_Hurt");
+                float d = ((Health - MaxHealth) / MaxHealth) * -1;                
+//                Debug.Log(Health + " of " + MaxHealth + " is " + (d * 100) + "%");
+                anim.SetFloat("Damage", d);
                 GameManager.PLAYER.GetComponent<AudioSource>().clip = GameManager.PLAYER.FindSound("Rubble_Break");
                 GameManager.PLAYER.GetComponent<AudioSource>().Play();
             }
@@ -69,7 +72,7 @@ public class I_am_an_Object : MonoBehaviour
         if(gameObject.CompareTag("Bomb"))GetComponent<CircleCollider2D>().isTrigger = false;
         Collider2D[] col = Physics2D.OverlapBoxAll(transform.position, new Vector2(1, 1), 0);
         for (int _i = 0; _i < col.Length; _i++)
-            if (col[_i].CompareTag("Player"))
+            if (col[_i].CompareTag("Player") && gameObject.CompareTag("Block"))
             {
                 anim.SetTrigger("Rubble_Crumble");
                 GameManager.PLAYER.Player_Death();

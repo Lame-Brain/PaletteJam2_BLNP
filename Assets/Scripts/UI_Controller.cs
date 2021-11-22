@@ -9,13 +9,18 @@ public class UI_Controller : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject HUD;
     public GameObject VictoryScreen, DeadScreen, NextLevelButton;
+    public AudioSource MusicPlayer;
+    public List<AudioClip> Songs = new List<AudioClip>();
+    public AudioClip failSong, victorySong;
+    private int musicTrack = 0;
 
     public TMPro.TextMeshProUGUI lives, waves, timer;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        MusicPlayer.clip = Songs[0];
+        MusicPlayer.Play();
     }
 
     // Update is called once per frame
@@ -42,6 +47,16 @@ public class UI_Controller : MonoBehaviour
             waves.text = "NEXT";
         timer.text = GameManager.PUZZLE.Timer.ToString("F2");
         #endregion
+
+        if (!MusicPlayer.isPlaying && !DeadScreen.activeSelf && !VictoryScreen.activeSelf)
+        {
+            if (musicTrack < Songs.Count-1)
+            {
+                musicTrack++;
+                MusicPlayer.clip = Songs[musicTrack];
+                MusicPlayer.Play();
+            }
+        }
     }
 
 
@@ -51,16 +66,24 @@ public class UI_Controller : MonoBehaviour
     }
     IEnumerator Show_Death_Screen_CR()
     {
-        yield return new WaitForSeconds(1);
+        MusicPlayer.clip = failSong;
+        MusicPlayer.Play();
+        yield return new WaitForSeconds(2);
         DeadScreen.SetActive(true);
     }
 
     public void Show_Victory_Screen()
     {
+        StartCoroutine(Show_Victory_Screen_CR());
+    }
+    IEnumerator Show_Victory_Screen_CR()
+    {
+        MusicPlayer.clip = victorySong;
+        MusicPlayer.Play();
+        yield return new WaitForSeconds(2);
         if (GameManager.CheckLastLevelReached(SceneManager.GetActiveScene().buildIndex + 1)) NextLevelButton.SetActive(false);
         VictoryScreen.SetActive(true);
     }
-
 
 
     public void Resume()
