@@ -57,6 +57,7 @@ public class UI_Controller : MonoBehaviour
                 MusicPlayer.clip = Songs[musicTrack];
                 MusicPlayer.Play();
             }
+            if (musicTrack == Songs.Count - 1) MusicPlayer.Play();
         }
     }
 
