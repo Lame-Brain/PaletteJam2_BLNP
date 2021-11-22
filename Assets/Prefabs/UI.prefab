@@ -2451,6 +2451,7 @@ MonoBehaviour:
   VictoryScreen: {fileID: 5536206943857875268}
   DeadScreen: {fileID: 609314238699925457}
   NextLevelButton: {fileID: 8672815091060717113}
+  RetryButton: {fileID: 1518034155542548757}
   MusicPlayer: {fileID: 7243267961972555013}
   Songs:
   - {fileID: 8300000, guid: e3f6bec3dd51eea4a80624a352a65bc2, type: 3}

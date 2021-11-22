@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MainMenu_Controller : MonoBehaviour
 {
-    public GameObject Locked_Icon;
+    public GameObject Locked_Icon, won_banner;
     public TMPro.TextMeshProUGUI Level_Number;
 
     private int levelNumber;
@@ -20,6 +20,11 @@ public class MainMenu_Controller : MonoBehaviour
         levelNumber = 1;
         Level_Number.text = "0" + levelNumber.ToString();
         Locked_Icon.SetActive(false);
+
+        if (GameManager.lastLevelReached >= SceneManager.sceneCountInBuildSettings - 1)
+            won_banner.SetActive(true);
+        else
+            won_banner.SetActive(false);
     }
 
     public void ChangeLevel(int delta)
