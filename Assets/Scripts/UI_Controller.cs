@@ -48,9 +48,9 @@ public class UI_Controller : MonoBehaviour
         timer.text = GameManager.PUZZLE.Timer.ToString("F2");
         #endregion
 
-        if (!MusicPlayer.isPlaying)
+        if (!MusicPlayer.isPlaying && !DeadScreen.activeSelf && !VictoryScreen.activeSelf)
         {
-            if (musicTrack < Songs.Count)
+            if (musicTrack < Songs.Count-1)
             {
                 musicTrack++;
                 MusicPlayer.clip = Songs[musicTrack];
@@ -66,18 +66,24 @@ public class UI_Controller : MonoBehaviour
     }
     IEnumerator Show_Death_Screen_CR()
     {
-        yield return new WaitForSeconds(1);
-        DeadScreen.SetActive(true);
         MusicPlayer.clip = failSong;
         MusicPlayer.Play();
+        yield return new WaitForSeconds(2);
+        DeadScreen.SetActive(true);
     }
 
     public void Show_Victory_Screen()
     {
+        StartCoroutine(Show_Victory_Screen_CR());
+    }
+    IEnumerator Show_Victory_Screen_CR()
+    {
+        MusicPlayer.clip = victorySong;
+        MusicPlayer.Play();
+        yield return new WaitForSeconds(2);
         if (GameManager.CheckLastLevelReached(SceneManager.GetActiveScene().buildIndex + 1)) NextLevelButton.SetActive(false);
         VictoryScreen.SetActive(true);
     }
-
 
 
     public void Resume()
