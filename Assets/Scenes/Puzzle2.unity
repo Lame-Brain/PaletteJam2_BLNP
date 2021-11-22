@@ -9478,7 +9478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num_of_rubble_drops: 25
-  num_of_bombs: 8
+  num_of_bombs: 10
   wave_time: 6
 --- !u!1 &1265473730
 GameObject:
@@ -11518,7 +11518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num_of_rubble_drops: 20
-  num_of_bombs: 8
+  num_of_bombs: 10
   wave_time: 3
 --- !u!1 &1628615474
 GameObject:
@@ -12939,7 +12939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num_of_rubble_drops: 25
-  num_of_bombs: 10
+  num_of_bombs: 12
   wave_time: 9
 --- !u!1 &1766752276
 GameObject:

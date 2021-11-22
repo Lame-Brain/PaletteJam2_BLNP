@@ -1680,8 +1680,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ec3668fecee7e47a9909a6d3032a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num_of_rubble_drops: 15
-  num_of_bombs: 12
+  num_of_rubble_drops: 30
+  num_of_bombs: 14
   wave_time: 9
 --- !u!1 &132163178
 GameObject:
@@ -16220,7 +16220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num_of_rubble_drops: 25
-  num_of_bombs: 8
+  num_of_bombs: 10
   wave_time: 6
 --- !u!1 &1268761137
 GameObject:
@@ -20551,7 +20551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num_of_rubble_drops: 30
-  num_of_bombs: 8
+  num_of_bombs: 10
   wave_time: 3
 --- !u!1 &1633789421
 GameObject:
@@ -22924,8 +22924,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ec3668fecee7e47a9909a6d3032a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  num_of_rubble_drops: 20
-  num_of_bombs: 10
+  num_of_rubble_drops: 25
+  num_of_bombs: 12
   wave_time: 9
 --- !u!1 &1788856180
 GameObject:
