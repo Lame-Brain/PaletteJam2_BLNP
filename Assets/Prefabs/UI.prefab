@@ -1083,13 +1083,13 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 592955812482609069}
-        m_TargetAssemblyTypeName: UI_Controller, Assembly-CSharp
+      - m_Target: {fileID: 740745134523158925}
+        m_TargetAssemblyTypeName: I_am_a_SaveState, Assembly-CSharp
         m_MethodName: SFX_Volume_Slider
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 592955811469967121}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1365,13 +1365,13 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 592955812482609069}
-        m_TargetAssemblyTypeName: UI_Controller, Assembly-CSharp
+      - m_Target: {fileID: 740745134523158925}
+        m_TargetAssemblyTypeName: I_am_a_SaveState, Assembly-CSharp
         m_MethodName: Music_Volume_Slider
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 592955811786852462}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2371,6 +2371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 592955812482609070}
   - component: {fileID: 592955812482609069}
+  - component: {fileID: 740745134523158925}
   m_Layer: 0
   m_Name: UI
   m_TagString: UIController
@@ -2411,3 +2412,18 @@ MonoBehaviour:
   lives: {fileID: 592955812098159645}
   waves: {fileID: 592955812166905817}
   timer: {fileID: 592955812181763855}
+--- !u!114 &740745134523158925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592955812482609068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eacee02571371fd4e9354600fc9d04cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audiomixer: {fileID: 24100000, guid: 421c0dc9a29a2b64ba512d040a59bbd6, type: 2}
+  MusicVolumeSlider: {fileID: 592955811786852462}
+  SFXVolumeSlider: {fileID: 592955811469967121}

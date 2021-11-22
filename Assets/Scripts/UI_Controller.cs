@@ -74,13 +74,4 @@ public class UI_Controller : MonoBehaviour
     {
         Application.Quit();
     }
-
-    public void Music_Volume_Slider(Slider slider)
-    {
-        GameManager.SetMusicVolumeLevel(slider.value);
-    }
-    public void SFX_Volume_Slider(Slider slider)
-    {
-        GameManager.SetSFX_VolumeLevel(slider.value);
-    }
 }

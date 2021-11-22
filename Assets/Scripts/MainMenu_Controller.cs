@@ -37,14 +37,6 @@ public class MainMenu_Controller : MonoBehaviour
             Locked_Icon.SetActive(false);
     }
 
-    public void Music_Volume_Slider(Slider slider)
-    {
-        GameManager.SetMusicVolumeLevel(slider.value);
-    }
-    public void SFX_Volume_Slider(Slider slider)
-    {
-        GameManager.SetSFX_VolumeLevel(slider.value);
-    }
     public void StartLevel()
     {
         if(levelNumber <= GameManager.lastLevelReached) SceneManager.LoadScene(levelNumber);

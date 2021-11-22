@@ -32,12 +32,12 @@ public static class GameManager
     public static void SetSFX_VolumeLevel(float sliderVal)
     {
         SFX.SetFloat("SFX_Volume", Mathf.Log10(sliderVal) * 20);
-        PlayerPrefs.SetFloat("SFXVolume", Mathf.Log10(sliderVal) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", sliderVal);
     }
     public static void SetMusicVolumeLevel(float sliderVal)
     {
         SFX.SetFloat("Music_Volume", Mathf.Log10(sliderVal) * 20);
-        PlayerPrefs.SetFloat("MusicVolume", Mathf.Log10(sliderVal) * 20);
+        PlayerPrefs.SetFloat("MusicVolume", sliderVal);
     }
     public static void MuteSFX()
     {
