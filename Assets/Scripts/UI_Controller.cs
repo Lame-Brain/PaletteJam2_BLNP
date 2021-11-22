@@ -50,10 +50,12 @@ public class UI_Controller : MonoBehaviour
 
         if (!MusicPlayer.isPlaying)
         {
-            musicTrack++;
-            if (musicTrack == Songs.Count) musicTrack = 1;
-            MusicPlayer.clip = Songs[musicTrack];
-            MusicPlayer.Play();
+            if (musicTrack < Songs.Count)
+            {
+                musicTrack++;
+                MusicPlayer.clip = Songs[musicTrack];
+                MusicPlayer.Play();
+            }
         }
     }
 
