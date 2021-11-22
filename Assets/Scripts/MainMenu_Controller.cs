@@ -18,7 +18,7 @@ public class MainMenu_Controller : MonoBehaviour
     private void Start()
     {
         levelNumber = 1;
-        Level_Number.text = levelNumber.ToString();
+        Level_Number.text = "0" + levelNumber.ToString();
         Locked_Icon.SetActive(false);
     }
 

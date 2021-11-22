@@ -33,7 +33,7 @@ public class I_am_a_SaveState : MonoBehaviour
         GameManager.SetSFX_VolumeLevel(SFXVolumeSlider.value);
 
         if (PlayerPrefs.HasKey("LLReached"))
-            GameManager.lastLevelReached = PlayerPrefs.GetInt("LLReached");
+            GameManager.lastLevelReached = PlayerPrefs.GetInt("LLReached");            
         else
             GameManager.lastLevelReached = 1;
     }
