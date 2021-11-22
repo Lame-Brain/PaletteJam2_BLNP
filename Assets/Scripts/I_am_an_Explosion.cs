@@ -49,7 +49,7 @@ public class I_am_an_Explosion : MonoBehaviour
                 }
                 if (col_right[_c].CompareTag("Player")) GameManager.PLAYER.Player_Death();
                 if (col_right[_c].CompareTag("Bomb")) col_right[_c].GetComponent<I_am_an_Object>().Boom();
-                if (col_right[_c].CompareTag("Bat")) col_up[_c].GetComponent<I_am_a_Bat>().Bat_Goes_Boom();
+                if (col_right[_c].CompareTag("Bat")) col_right[_c].GetComponent<I_am_a_Bat>().Bat_Goes_Boom();
             }
             for (int _c = 0; _c < col_down.Length; _c++)
             {
@@ -60,7 +60,7 @@ public class I_am_an_Explosion : MonoBehaviour
                 }
                 if (col_down[_c].CompareTag("Player")) GameManager.PLAYER.Player_Death();
                 if (col_down[_c].CompareTag("Bomb")) col_down[_c].GetComponent<I_am_an_Object>().Boom();
-                if (col_down[_c].CompareTag("Bat")) col_up[_c].GetComponent<I_am_a_Bat>().Bat_Goes_Boom();
+                if (col_down[_c].CompareTag("Bat")) col_down[_c].GetComponent<I_am_a_Bat>().Bat_Goes_Boom();
             }
             for (int _c = 0; _c < col_left.Length; _c++)
             {
@@ -71,7 +71,7 @@ public class I_am_an_Explosion : MonoBehaviour
                 }
                 if (col_left[_c].CompareTag("Player")) GameManager.PLAYER.Player_Death();
                 if (col_left[_c].CompareTag("Bomb")) col_left[_c].GetComponent<I_am_an_Object>().Boom();
-                if (col_left[_c].CompareTag("Bat")) col_up[_c].GetComponent<I_am_a_Bat>().Bat_Goes_Boom();
+                if (col_left[_c].CompareTag("Bat")) col_left[_c].GetComponent<I_am_a_Bat>().Bat_Goes_Boom();
             }
         }
     }

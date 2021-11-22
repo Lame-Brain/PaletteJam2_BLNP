@@ -9,13 +9,18 @@ public class UI_Controller : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject HUD;
     public GameObject VictoryScreen, DeadScreen, NextLevelButton;
+    public AudioSource MusicPlayer;
+    public List<AudioClip> Songs = new List<AudioClip>();
+    public AudioClip failSong, victorySong;
+    private int musicTrack = 0;
 
     public TMPro.TextMeshProUGUI lives, waves, timer;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        MusicPlayer.clip = Songs[0];
+        MusicPlayer.Play();
     }
 
     // Update is called once per frame
@@ -42,6 +47,14 @@ public class UI_Controller : MonoBehaviour
             waves.text = "NEXT";
         timer.text = GameManager.PUZZLE.Timer.ToString("F2");
         #endregion
+
+        if (!MusicPlayer.isPlaying)
+        {
+            musicTrack++;
+            if (musicTrack == Songs.Count) musicTrack = 1;
+            MusicPlayer.clip = Songs[musicTrack];
+            MusicPlayer.Play();
+        }
     }
 
 
@@ -53,6 +66,8 @@ public class UI_Controller : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         DeadScreen.SetActive(true);
+        MusicPlayer.clip = failSong;
+        MusicPlayer.Play();
     }
 
     public void Show_Victory_Screen()
