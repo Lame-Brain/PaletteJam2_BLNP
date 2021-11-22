@@ -84,15 +84,6 @@ public class I_am_the_player : MonoBehaviour
                 FindObjectOfType<UI_Controller>().Resume();
         }
 
-        //DEBUG KEYS
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            Respawn();
-        }
-        if (Input.GetKeyUp(KeyCode.N))
-        {
-            GameManager.NextLevel();
-        }
     }
 
     public void SetJump(bool b)
@@ -122,6 +113,7 @@ public class I_am_the_player : MonoBehaviour
     {
         anim.SetBool("Dead", b);
         isDead = b;
+        FindObjectOfType<UI_Controller>().Show_Death_Screen();
     }
 
     private void FixedUpdate()
@@ -248,7 +240,6 @@ public class I_am_the_player : MonoBehaviour
     {
         if (canControl)
         {
-            canControl = false;
             SetDead(true);
             move = Vector2.zero;
             anim.SetBool("Jumping", false);
@@ -262,45 +253,22 @@ public class I_am_the_player : MonoBehaviour
         }
     }
 
-    public void Respawn()
-    {
-        if(GameManager.Lives > 0)
-        {
-            GameManager.Lives--;
-            rb.velocity = Vector2.zero;
-            move = Vector2.zero;
-            SetDead(false);
-            SetKick(false);
-            SetJump(false);
-            anim.SetInteger("Move Y", 0);
-            anim.SetInteger("Move X", 0);
-            anim.ResetTrigger("Death");
-            anim.ResetTrigger("Falls");
-            anim.ResetTrigger("Melts");
-            anim.ResetTrigger("Dance");
-            anim.SetTrigger("Respawn");
-            transform.position = GameManager.PUZZLE.PlayerSpawn;
-            canControl = true;
-        }
-    }
+    public bool IsDead() { return isDead; }
 
     public void GottaDance()
     {
-        if (!isDead)
-        {
-            canControl = false;
-            rb.velocity = Vector2.zero;
-            move = Vector2.zero;
-            SetDead(false);
-            SetKick(false);
-            SetJump(false);
-            anim.SetInteger("Move Y", 0);
-            anim.SetInteger("Move X", 0);
-            anim.ResetTrigger("Death");
-            anim.ResetTrigger("Falls");
-            anim.ResetTrigger("Melts");
-            anim.ResetTrigger("Respawn");
-            anim.SetTrigger("Dance");
-        }
+        canControl = false;
+        rb.velocity = Vector2.zero;
+        move = Vector2.zero;
+        SetDead(false);
+        SetKick(false);
+        SetJump(false);
+        anim.SetInteger("Move Y", 0);
+        anim.SetInteger("Move X", 0);
+        anim.ResetTrigger("Death");
+        anim.ResetTrigger("Falls");
+        anim.ResetTrigger("Melts");
+        anim.ResetTrigger("Respawn");
+        anim.SetTrigger("Dance");
     }
 }

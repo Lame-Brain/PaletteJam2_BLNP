@@ -46,13 +46,16 @@ public static class GameManager
     }
     #endregion
 
-    public static void CheckLastLevelReached(int level)
+    public static bool CheckLastLevelReached(int level)
     {
-        if(level > lastLevelReached)
+        if (level > lastLevelReached && level < SceneManager.sceneCountInBuildSettings)
         {
-            lastLevelReached = level;
-            PlayerPrefs.SetInt("LLReached", level);
+                lastLevelReached = level;
+                PlayerPrefs.SetInt("LLReached", level);
         }
+
+        if (level == SceneManager.sceneCountInBuildSettings) return true;
+        return false;
     }
 
     public static void PauseGame(bool isPaused)
