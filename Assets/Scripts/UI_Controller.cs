@@ -8,11 +8,12 @@ public class UI_Controller : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenu;
     public GameObject HUD;
-    public GameObject VictoryScreen, DeadScreen, NextLevelButton;
+    public GameObject VictoryScreen, DeadScreen, NextLevelButton, RetryButton;
     public AudioSource MusicPlayer;
     public List<AudioClip> Songs = new List<AudioClip>();
     public AudioClip failSong, victorySong;
     private int musicTrack = 0;
+
 
     public TMPro.TextMeshProUGUI lives, waves, timer;
 
@@ -68,6 +69,8 @@ public class UI_Controller : MonoBehaviour
     {
         MusicPlayer.clip = failSong;
         MusicPlayer.Play();
+        GameManager.Lives--;
+        if (GameManager.Lives < 1) RetryButton.SetActive(false);
         yield return new WaitForSeconds(2);
         DeadScreen.SetActive(true);
     }
