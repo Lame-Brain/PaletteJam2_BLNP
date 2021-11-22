@@ -32,12 +32,12 @@ public static class GameManager
     public static void SetSFX_VolumeLevel(float sliderVal)
     {
         SFX.SetFloat("SFX_Volume", Mathf.Log10(sliderVal) * 20);
-        PlayerPrefs.SetFloat("SFXVolume", Mathf.Log10(sliderVal) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", sliderVal);
     }
     public static void SetMusicVolumeLevel(float sliderVal)
     {
         SFX.SetFloat("Music_Volume", Mathf.Log10(sliderVal) * 20);
-        PlayerPrefs.SetFloat("MusicVolume", Mathf.Log10(sliderVal) * 20);
+        PlayerPrefs.SetFloat("MusicVolume", sliderVal);
     }
     public static void MuteSFX()
     {
@@ -46,13 +46,16 @@ public static class GameManager
     }
     #endregion
 
-    public static void CheckLastLevelReached(int level)
+    public static bool CheckLastLevelReached(int level)
     {
-        if(level > lastLevelReached)
+        if (level > lastLevelReached && level < SceneManager.sceneCountInBuildSettings)
         {
-            lastLevelReached = level;
-            PlayerPrefs.SetInt("LLReached", level);
+                lastLevelReached = level;
+                PlayerPrefs.SetInt("LLReached", level);
         }
+
+        if (level == SceneManager.sceneCountInBuildSettings) return true;
+        return false;
     }
 
     public static void PauseGame(bool isPaused)

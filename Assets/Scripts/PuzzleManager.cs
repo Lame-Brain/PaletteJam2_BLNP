@@ -253,9 +253,16 @@ public class PuzzleManager : MonoBehaviour
             }
             else
             {
-                //next scene
-                Debug.Log("Load the next scene");
-                GameManager.PLAYER.GottaDance();
+                if (GameManager.PLAYER.IsDead())
+                {
+                    FindObjectOfType<UI_Controller>().Show_Death_Screen();
+                }
+                else
+                {
+                    GameManager.PLAYER.GottaDance();
+                    FindObjectOfType<UI_Controller>().Show_Victory_Screen();
+                }
+
             }
         }
     }

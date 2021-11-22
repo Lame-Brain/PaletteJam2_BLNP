@@ -8,6 +8,7 @@ public class UI_Controller : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenu;
     public GameObject HUD;
+    public GameObject VictoryScreen, DeadScreen, NextLevelButton;
 
     public TMPro.TextMeshProUGUI lives, waves, timer;
 
@@ -42,6 +43,26 @@ public class UI_Controller : MonoBehaviour
         timer.text = GameManager.PUZZLE.Timer.ToString("F2");
         #endregion
     }
+
+
+    public void Show_Death_Screen()
+    {
+        StartCoroutine(Show_Death_Screen_CR());
+    }
+    IEnumerator Show_Death_Screen_CR()
+    {
+        yield return new WaitForSeconds(1);
+        DeadScreen.SetActive(true);
+    }
+
+    public void Show_Victory_Screen()
+    {
+        if (GameManager.CheckLastLevelReached(SceneManager.GetActiveScene().buildIndex + 1)) NextLevelButton.SetActive(false);
+        VictoryScreen.SetActive(true);
+    }
+
+
+
     public void Resume()
     {
         pauseMenu.SetActive(false);
@@ -70,17 +91,9 @@ public class UI_Controller : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
     }
-    public void QuitGame()
+    
+    public void NextLevel()
     {
-        Application.Quit();
-    }
-
-    public void Music_Volume_Slider(Slider slider)
-    {
-        GameManager.SetMusicVolumeLevel(slider.value);
-    }
-    public void SFX_Volume_Slider(Slider slider)
-    {
-        GameManager.SetSFX_VolumeLevel(slider.value);
+        GameManager.NextLevel();
     }
 }
